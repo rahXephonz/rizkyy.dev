@@ -31,10 +31,10 @@ const posts = postsConnection.edges;
           sizes="(max-width: 800px) 100vw, 800px"
           widths={[200, 400, 800]}
           aspectRatio="16:9"
-          background="#ffffff"
           fit="cover"
           position="center"
-          loading="lazy"
+          format="webp"
+          loading="eager"
           class="w-full rounded-md"
         />
 
@@ -44,7 +44,6 @@ const posts = postsConnection.edges;
               <span class="text-[#1BD7CB] text-sm">#{item.name}</span>
             ))
           }
-
           <a href={`/blogs/${posts[0].node.slug}`} class="no-underline">
             <p class="text-[22px] font-bold">
               {posts[0].node.title}
@@ -64,10 +63,10 @@ const posts = postsConnection.edges;
                   sizes="(max-width: 800px) 100vw, 800px"
                   widths={[200, 400, 800]}
                   aspectRatio="16:9"
-                  background="#ffffff"
+                  format="webp"
                   fit="cover"
                   position="center"
-                  loading="lazy"
+                  loading="eager"
                   class="w-full rounded-md"
                 />
               </div>
