@@ -1,0 +1,37 @@
+---
+import cx from "classnames";
+import Container from "./container.astro";
+
+const socialMedia = [
+  {id: "Github", url: "https://github.com/ioofy"},
+  {id: "Behance", url: "https://behance.net/muhamadrizky27"},
+  {id: "hello@rizkyy.dev", url: "mailto:hello@rizkyy.dev"},
+];
+---
+
+<footer class="my-20 xsm:my-10">
+  <Container>
+    <div class="flex items-center space-x-2">
+      {
+        socialMedia.map((item, itemIdx, size) => (
+          <div class="flex space-x-2">
+            <a
+              href={item.url}
+              class={cx({"no-underline": size.length - 1 === itemIdx})}>
+              {item.id}
+            </a>
+            {size.length - 1 === itemIdx ? null : <span>·</span>}
+          </div>
+        ))
+      }
+    </div>
+    <div class="flex justify-between mt-[8rem] xsm:mt-[4rem]">
+      <p>Crafted by Figma 🎨</p>
+      <ul>
+        <li>
+          <a href="/rss">RSS</a>
+        </li>
+      </ul>
+    </div>
+  </Container>
+</footer>

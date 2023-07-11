@@ -1,0 +1,47 @@
+---
+import Container from "@components/container.astro";
+import cx from "classnames";
+
+const menuItems = [
+  {
+    title: "Blogs",
+    path: "/blogs",
+  },
+  {
+    title: "Projects",
+    path: "/projects",
+  },
+  {
+    title: "About",
+    path: "/",
+  },
+];
+
+const currentPath = Astro.url.pathname;
+const [item] = menuItems.filter((i) => i.path === currentPath);
+---
+
+<Container class="mt-16 mb-14">
+  <span class="text-2xl font-bold">{item?.title}</span>
+  <header class="flex justify-end xsm:mt-5">
+    <nav>
+      <ul class="flex justify-between space-x-5 font-sans">
+        {
+          menuItems.map((i, idx) => (
+            <Fragment key={idx}>
+              <li>
+                <a
+                  href={i.path}
+                  class={cx({
+                    "no-underline opacity-50": i.path === currentPath,
+                  })}>
+                  {i.title}
+                </a>
+              </li>
+            </Fragment>
+          ))
+        }
+      </ul>
+    </nav>
+  </header>
+</Container>

@@ -1,0 +1,43 @@
+---
+import {type z} from "astro:content";
+import {type PostType, type PostDetailType, graphqlFetch} from "@utils/all";
+import {postQuery, postDetailQuery} from "@graphql/query";
+import {Markdown} from "@astropub/md";
+import Container from "@components/container.astro";
+import BlogLayout from "@layouts/BlogLayout.astro";
+
+type PostQueryType = z.infer<typeof PostType>;
+type DetailPostQueryType = z.infer<typeof PostDetailType>;
+
+export async function getStaticPaths() {
+  const {data} = await graphqlFetch<PostQueryType>({
+    query: postQuery,
+  });
+
+  return data.postsConnection.edges.map((item) => ({
+    params: {slug: item.node.slug},
+  }));
+}
+
+const {slug} = Astro.params;
+
+const {
+  data: {post},
+} = await graphqlFetch<DetailPostQueryType>({
+  query: postDetailQuery,
+  variables: {slug},
+});
+---
+
+<BlogLayout title={post.title}>
+  <Container>
+    <h1 class="text-4xl">{post.title}</h1>
+    <Markdown of={post.content} />
+  </Container>
+</BlogLayout>
+
+<link rel="stylesheet" href="/css/hljs-github-dark.css" />
+<script src="/js/highlight.min.js" is:inline></script>
+<script is:inline>
+  hljs.highlightAll();
+</script>

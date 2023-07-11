@@ -1,0 +1,30 @@
+<style>
+  .sun {
+    fill: black;
+  }
+  .moon {
+    fill: transparent;
+  }
+
+  :global(.dark) .sun {
+    fill: transparent;
+  }
+  :global(.dark) .moon {
+    fill: white;
+  }
+</style>
+
+<script is:inline>
+  const theme = (() => {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+      return "dark";
+
+    return "light";
+  })();
+
+  if (theme === "light") {
+    document.documentElement.classList.remove("dark");
+  } else {
+    document.documentElement.classList.add("dark");
+  }
+</script>

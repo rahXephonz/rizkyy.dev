@@ -1,0 +1,15 @@
+---
+import cx from "classnames";
+
+const {class: className} = Astro.props;
+const currentPath = Astro.url.pathname;
+const isBlogPath = currentPath === "/blogs";
+---
+
+<div
+  class:list={cx(["mx-auto px-5", className], {
+    "max-w-3xl": !isBlogPath,
+    "max-w-4xl": isBlogPath,
+  })}>
+  <slot />
+</div>
