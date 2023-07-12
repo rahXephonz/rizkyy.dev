@@ -4,6 +4,7 @@ import image from "@astrojs/image";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import markdownIntegration from "@astropub/md";
+import partytown from "@astrojs/partytown";
 
 export default defineConfig({
   site: "https://rizkyy.dev",
@@ -15,5 +16,11 @@ export default defineConfig({
     markdownIntegration(),
     mdx(),
     sitemap(),
+    partytown({
+      // Adds dataLayer.push as a forwarding-event.
+      config: {
+        forward: ["dataLayer.push"],
+      },
+    }),
   ],
 });
