@@ -72,14 +72,29 @@ export const PostDetailType = z.object({
   }),
 });
 
-export const getFormattedDate = (date: string) =>
-  date
-    ? new Date(date).toLocaleDateString("en-us", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })
-    : "";
+export function parseTimestamp(timestamp: string): string {
+  const date = new Date(timestamp);
+
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+
+  const parsedTime = `${year}/${month}/${day}`;
+  return parsedTime;
+}
+
+export function parseTime(time: string): string {
+  const date = new Date(time);
+
+  const options: Intl.DateTimeFormatOptions = {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+  };
+
+  const parsedTime = date.toLocaleDateString("en-US", options);
+  return parsedTime;
+}
 
 export const graphqlFetch = async <T = TUniversal>(
   body: GraphqlBodyObj

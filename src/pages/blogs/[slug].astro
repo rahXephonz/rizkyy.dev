@@ -5,6 +5,7 @@ import {postQuery, postDetailQuery} from "@graphql/query";
 import {Markdown} from "@astropub/md";
 import Container from "@components/container.astro";
 import BlogLayout from "@layouts/BlogLayout.astro";
+import {Picture} from "@astrojs/image/components";
 
 type PostQueryType = z.infer<typeof PostType>;
 type DetailPostQueryType = z.infer<typeof PostDetailType>;
@@ -29,10 +30,43 @@ const {
 });
 ---
 
-<BlogLayout title={post.title}>
+<BlogLayout title={post.title} urlImage={post.thumbnailImage.url}>
   <Container>
-    <h1 class="text-4xl">{post.title}</h1>
-    <Markdown of={post.content} />
+    <div class="mt-20 text-purple-400">
+      {post.categories.map((item) => <span>#{item.name}</span>)}
+    </div>
+    <h1 class="text-4xl xsm:text-3xl mt-2">
+      {post.title}
+    </h1>
+    <div class="meta mb-10">
+      <div class="meta-content my-2 flex justify-between text-gray-400">
+        <div class="meta-inline text-[15px]">
+          Riz,
+          <time class="meta-time"> Wed Aug 31 2022</time>
+        </div>
+        <a href="/blogs">Back</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="meta-image">
+        <Picture
+          src={post.thumbnailImage.url}
+          alt="meta-blog-image"
+          sizes="(max-width: 800px) 100vw, 800px"
+          widths={[200, 400, 800]}
+          aspectRatio="16:9"
+          format="webp"
+          fit="cover"
+          position="center"
+          loading="eager"
+          class="w-full rounded-md"
+        />
+      </div>
+    </div>
+    <div class="blog-prose mt-10">
+      <Markdown of={post.content} />
+    </div>
   </Container>
 </BlogLayout>
 

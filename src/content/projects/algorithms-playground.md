@@ -1,13 +1,14 @@
 ---
 draft: false
-title: "Algorithms"
-snippet: "Playground Algorithm with Typescript or React"
+title: "Algorithms Playground"
+snippet: "Exercise an Algorithm with Typescript or React"
 image:
   {
     src: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?&fit=crop&w=430&h=240",
     alt: "frontend master",
   }
-publishDate: "2022-11-07 15:39"
+createdDate: "2023-01-01"
+type: "playground"
 ---
 
 ## Algorithms is

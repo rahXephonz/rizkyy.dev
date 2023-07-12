@@ -9,13 +9,6 @@
   Current colors taken from GitHub's CSS
 */
 
-pre {
-  padding: 1em;
-}
-
-pre code {
-  font-family: "IBM Plex Mono", monospace !important;
-}
 
 .hljs {
   color: #c9d1d9;

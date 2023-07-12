@@ -6,7 +6,7 @@ import sitemap from "@astrojs/sitemap";
 import markdownIntegration from "@astropub/md";
 
 export default defineConfig({
-  site: "https://astroship.web3templates.com",
+  site: "https://rizkyy.dev",
   integrations: [
     tailwind(),
     image({

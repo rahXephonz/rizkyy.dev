@@ -4,6 +4,8 @@ import {Markdown} from "@astropub/md";
 
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
+import {Picture} from "@astrojs/image/components";
+import {parseTime} from "@utils/all";
 
 export async function getStaticPaths() {
   const projectEntries = await getCollection("projects");
@@ -18,8 +20,35 @@ const {entry} = Astro.props;
 
 <Layout title={entry.data.title}>
   <Container>
-    <h1>{entry.data.title}</h1>
-    <Markdown of={entry.body} />
+    <div class="meta">
+      <div class="meta-title">
+        <h1 class="text-3xl font-bold">{entry.data.title}</h1>
+        <div
+          class="flex justify-between items-center mt-3 xsm:flex-col xsm:items-start">
+          <p>{entry.data.snippet}</p>
+          <time class="text-sm text-gray-500 xsm:mt-1"
+            >{parseTime(entry.data.createdDate)}</time
+          >
+        </div>
+      </div>
+      <div class="meta-image mt-10">
+        <Picture
+          src={entry.data.image.src}
+          alt={entry.data.image.alt}
+          sizes="(max-width: 800px) 100vw, 600px"
+          widths={[200, 400, 600]}
+          aspectRatio="16:9"
+          format="webp"
+          fit="cover"
+          position="center"
+          loading="eager"
+          class="w-full rounded-md"
+        />
+      </div>
+    </div>
+    <div class="blog-prose">
+      <Markdown of={entry.body} />
+    </div>
   </Container>
 </Layout>
 

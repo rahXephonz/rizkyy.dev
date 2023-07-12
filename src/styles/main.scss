@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,400;1,500&display=swap");
+
+@font-face {
+  font-family: "Ogg";
+  src: url("/fonts/Ogg.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html.dark {
+  background-color: #18191b;
+  color: #ffff;
+}
+
+html.light {
+  background-color: #ffff;
+  color: #18191b;
+}
+
+img {
+  content-visibility: auto;
+}
+
+a {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Ogg", sans-serif;
+}
+
+.blog-prose {
+  h2,
+  h3,
+  a,
+  p,
+  ul,
+  ol,
+  hr,
+  li,
+  pre,
+  code,
+  table,
+  thead,
+  blockquote,
+  tbody,
+  tr,
+  th,
+  td,
+  img {
+    margin: 25px 0px;
+  }
+
+  p {
+    code {
+      padding: 5px;
+      background: #373c49;
+      color: #fff;
+      border-radius: 2px;
+
+      font-size: 14px;
+      margin: 0 2px;
+    }
+  }
+
+  p {
+    em {
+      font-size: 16px;
+      opacity: 1;
+      line-height: 1.5;
+    }
+  }
+
+  pre {
+    padding: 1em;
+  }
+
+  pre {
+    code {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 14px;
+      border-radius: 2px;
+      .hljs-tag,
+      .hljs-function,
+      .hljs-params {
+        color: #fff;
+      }
+    }
+  }
+
+  blockquote {
+    text-align: center;
+    font-family: "IBM Plex Mono", monospace;
+    p {
+      opacity: 0.9;
+      line-height: 1.2em;
+    }
+  }
+
+  ul {
+    list-style-type: square;
+    padding: 0px 15px;
+    li {
+      font-size: 17px;
+    }
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  h1,
+  h2,
+  h3 {
+    line-height: 1.3em;
+    color: #d1d5db;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.7em;
+    color: #d1d5db;
+
+    @media screen and (max-width: 428px) {
+      font-size: 16px;
+    }
+  }
+
+  img {
+    border-radius: 5px !important;
+    display: flex;
+    justify-content: center;
+    height: auto;
+    object-fit: contain;
+  }
+
+  em {
+    font-family: "IBM Plex Mono", sans-serif;
+    font-size: 15px;
+    opacity: 0.8;
+  }
+
+  @media screen and (max-width: 834px) {
+    width: 100%;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 360px) {
+    h2 {
+      font-size: 1.35rem;
+    }
+    h3 {
+      font-size: 1.2rem;
+    }
+    em {
+      font-size: 13px;
+    }
+    blockquote {
+      p {
+        font-size: 1.5rem !important;
+      }
+    }
+  }
+}

@@ -1,10 +1,70 @@
 ---
 import Container from "@components/container.astro";
 import Layout from "@layouts/Layout.astro";
+import {getCollection} from "astro:content";
+
+const publishedProjectEntries = await getCollection("projects", ({data}) => {
+  return !data.draft && data.createdDate < new Date();
+});
+
+publishedProjectEntries.sort(function getData(a, b) {
+  return a.data.createdDate.valueOf() - b.data.createdDate.valueOf();
+});
 ---
 
 <Layout title="Projects">
-  <Container class="text-gray-300 flex flex-col space-y-6">
-    <h1>Hello World</h1>
+  <Container>
+    <div class="flex flex-col space-y-3">
+      <p class="text-gray-400 mb-3">
+        Here are the Product Projects i have been creating, maintaining, and
+        investing a lot of effort
+      </p>
+
+      {
+        publishedProjectEntries
+          .filter((project) => project.data.type === "product")
+          .map((project, projectIdx, size) => (
+            <Fragment>
+              <a
+                class="no-underline hover:opacity-70"
+                href={`/projects/${project.slug}`}>
+                <div class="flex justify-between xsm:flex-col xsm:space-y-1 items-center xsm:items-start">
+                  <p class="font-ogg text-xl font-bold">{project.data.title}</p>
+                  <p class="text-gray-500">{project.data.snippet}</p>
+                </div>
+              </a>
+
+              {size.length - 1 === projectIdx ? null : (
+                <hr class="dark:opacity-20" />
+              )}
+            </Fragment>
+          ))
+      }
+    </div>
+
+    <div class="flex flex-col space-y-3 mt-20">
+      <p class="text-gray-400 mb-3">Side Projects for spent my freetime</p>
+
+      {
+        publishedProjectEntries
+          .filter((project) => project.data.type !== "product")
+          .map((project, projectIdx, size) => (
+            <Fragment>
+              <a
+                class="no-underline hover:opacity-70"
+                href={`/projects/${project.slug}`}>
+                <div class="flex justify-between xsm:flex-col xsm:space-y-1 items-center xsm:items-start">
+                  <p class="font-ogg text-xl font-bold">{project.data.title}</p>
+                  <p class="text-gray-500">{project.data.snippet}</p>
+                </div>
+              </a>
+
+              {size.length - 1 === projectIdx ? null : (
+                <hr class="dark:opacity-20" />
+              )}
+            </Fragment>
+          ))
+      }
+    </div>
   </Container>
 </Layout>

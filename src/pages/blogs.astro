@@ -2,7 +2,7 @@
 import {postQuery} from "@graphql/query";
 import {type z} from "astro:content";
 import {Picture} from "@astrojs/image/components";
-import {graphqlFetch, type PostType} from "@utils/all";
+import {graphqlFetch, type PostType, parseTimestamp} from "@utils/all";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 
@@ -23,70 +23,95 @@ const posts = postsConnection.edges;
 
 <Layout title="Blogs">
   <Container>
-    <div class="mb-10 grid grid-cols-2 gap-6 xsm:grid-cols-1 font-grotesk">
-      <div class="flex flex-col space-y-3">
-        <Picture
-          src={posts[0].node.thumbnailImage.url}
-          alt="thumbnail-post"
-          sizes="(max-width: 800px) 100vw, 800px"
-          widths={[200, 400, 800]}
-          aspectRatio="16:9"
-          fit="cover"
-          position="center"
-          format="webp"
-          loading="eager"
-          class="w-full rounded-md"
-        />
+    {
+      posts.length >= 4 ? (
+        <div class="mb-10 grid grid-cols-2 gap-6 xsm:grid-cols-1">
+          <div class="flex flex-col space-y-3">
+            <Picture
+              src={posts[0].node.thumbnailImage.url}
+              alt="thumbnail-post"
+              sizes="(max-width: 800px) 100vw, 800px"
+              widths={[200, 400, 800]}
+              aspectRatio="16:9"
+              fit="cover"
+              position="center"
+              format="webp"
+              loading="eager"
+              class="w-full rounded-md"
+            />
 
-        <div>
-          {
-            posts[0].node.categories.map((item) => (
-              <span class="text-[#1BD7CB] text-sm">#{item.name}</span>
-            ))
-          }
-          <a href={`/blogs/${posts[0].node.slug}`} class="no-underline">
-            <p class="text-[22px] font-bold">
-              {posts[0].node.title}
-            </p>
-          </a>
-        </div>
-      </div>
-
-      <div class="flex flex-col space-y-3">
-        {
-          posts.splice(1, 2).map((item) => (
-            <div class="flex space-x-3 xsm:flex-col xsm:space-x-0">
-              <div class="w-1/2 xsm:w-full">
-                <Picture
-                  src={item.node.thumbnailImage.url}
-                  alt="thumbnail-post"
-                  sizes="(max-width: 800px) 100vw, 800px"
-                  widths={[200, 400, 800]}
-                  aspectRatio="16:9"
-                  format="webp"
-                  fit="cover"
-                  position="center"
-                  loading="eager"
-                  class="w-full rounded-md"
-                />
+            <div class="meta">
+              <div class="meta-categories">
+                {posts[0].node.categories.map((item) => (
+                  <span class="text-purple-400 text-sm">#{item.name}</span>
+                ))}
               </div>
-              <div class="w-1/2 xsm:w-full">
-                <p class="font-pollysans text-gray-400">{item.node.title}</p>
+              <time class="text-gray-400 text-sm font-sans meta-time">
+                {parseTimestamp(posts[0].node.createdAt)}
+              </time>
+
+              <div class="mt-2 meta-content">
+                <a href={`/blogs/${posts[0].node.slug}`} class="no-underline">
+                  <p class="text-2xl font-bold font-ogg">
+                    {posts[0].node.title}
+                  </p>
+                </a>
               </div>
             </div>
+          </div>
+
+          <div class="flex flex-col space-y-3">
+            {posts.splice(1, 2).map((item) => (
+              <div class="flex space-x-3 xsm:flex-col xsm:space-x-0">
+                <div class="w-1/2 xsm:w-full">
+                  <Picture
+                    src={item.node.thumbnailImage.url}
+                    alt="thumbnail-post"
+                    sizes="(max-width: 800px) 100vw, 800px"
+                    widths={[200, 400, 800]}
+                    aspectRatio="16:9"
+                    format="webp"
+                    fit="cover"
+                    position="center"
+                    loading="eager"
+                    class="w-full rounded-md"
+                  />
+                </div>
+                <div class="w-1/2 xsm:w-full">
+                  <p class="font-pollysans text-gray-400">{item.node.title}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null
+    }
+
+    <ul class="list-of-blog">
+      <li class="mt-3">
+        {
+          posts.splice(posts.length >= 3 ? 1 : 0).map((item) => (
+            <Fragment>
+              {item.node.categories.map((c) => (
+                <span class="text-purple-400 text-sm">#{c.name}</span>
+              ))}
+              <a
+                href={`/blogs/${item.node.slug}`}
+                class="no-underline hover:opacity-70">
+                <div class="flex mt-1 justify-between items-center xsm:flex-col xsm:items-start">
+                  <p class="font-ogg text-2xl no-underline text-gray-200">
+                    {item.node.title}
+                  </p>
+
+                  <time class="text-gray-400 text-sm xsm:mt-2">
+                    {parseTimestamp(item.node.createdAt)}
+                  </time>
+                </div>
+              </a>
+            </Fragment>
           ))
         }
-      </div>
-    </div>
-
-    <ul>
-      {
-        posts.splice(1).map((item) => (
-          <li class="mt-3">
-            <a href={`/blogs/${item.node.slug}`}>{item.node.title}</a>
-          </li>
-        ))
-      }
+      </li>
     </ul>
   </Container>
 </Layout>
