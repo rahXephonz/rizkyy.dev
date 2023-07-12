@@ -61,5 +61,17 @@ const makeTitle = title && `${title}`;
     </main>
     <Footer />
     <Theme />
+
+    {
+      import.meta.env.PROD ? (
+        <script
+          async
+          strategy="afterInteractive"
+          type="text/javascript"
+          src="https://umami.rizkyy.dev/script.js"
+          data-website-id="67b6272c-99cf-409a-8950-f6bad8cf296f"
+        />
+      ) : null
+    }
   </body>
 </html>
