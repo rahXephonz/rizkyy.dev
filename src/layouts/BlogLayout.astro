@@ -6,11 +6,12 @@ import "../styles/main.scss";
 
 export interface Props {
   title: string;
+  description: string;
   urlImage: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
-const {title, urlImage} = Astro.props;
+const {title, urlImage, description} = Astro.props;
 
 const resolvedImageWithDomain = new URL(urlImage, Astro.site).toString();
 
@@ -44,11 +45,28 @@ const makeTitle = title && `${title}`;
           title: makeTitle,
           image: resolvedImageWithDomain,
         },
+        optional: {
+          description,
+          siteName: "rizkyy.dev",
+        },
         image: {
           alt: title,
         },
       }}
     />
+
+    <script
+      type="text/partytown"
+      src="https://www.googletagmanager.com/gtag/js?id=G-93YBNJY3Z4"></script>
+
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-93YBNJY3Z4");
+    </script>
   </head>
   <body>
     <slot />

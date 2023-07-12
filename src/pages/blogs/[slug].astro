@@ -30,7 +30,10 @@ const {
 });
 ---
 
-<BlogLayout title={post.title} urlImage={post.thumbnailImage.url}>
+<BlogLayout
+  title={post.title}
+  urlImage={post.thumbnailImage.url}
+  description={post.excerpt}>
   <Container>
     <div class="mt-20 text-purple-400">
       {post.categories.map((item) => <span>#{item.name}</span>)}
