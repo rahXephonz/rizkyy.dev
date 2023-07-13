@@ -17,6 +17,8 @@ import BlogLayout from "@layouts/BlogLayout.astro";
 type PostQueryType = z.infer<typeof PostType>;
 type DetailPostQueryType = z.infer<typeof PostDetailType>;
 
+// export const prerender = true;
+
 export async function getStaticPaths() {
   const {data} = await graphqlFetch<PostQueryType>({
     query: postQuery,
