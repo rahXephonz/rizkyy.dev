@@ -1,0 +1,16 @@
+---
+import {parseNumber} from "@utils/all";
+import {Icon} from "astro-icon";
+
+const {slug} = Astro.params;
+
+const data = await fetch(`${Astro.url.origin}/api/view/${slug}.json`);
+const {views} = await data.json();
+---
+
+<div class="flex items-center space-x-1">
+  <div class="w-4 h-4 flex items-center">
+    <Icon name="mdi:eye" />
+  </div>
+  <span>{parseNumber(views)}</span>
+</div>

@@ -5,19 +5,16 @@ import {
   type PostDetailType,
   graphqlFetch,
   parseTime,
-  parseNumber,
 } from "@utils/all";
-import {Icon} from "astro-icon";
 import {Picture} from "@astrojs/image/components";
 import {postQuery, postDetailQuery} from "@graphql/query";
 import {Markdown} from "@astropub/md";
 import Container from "@components/container.astro";
 import BlogLayout from "@layouts/BlogLayout.astro";
+import CounterView from "./counter-view.astro";
 
 type PostQueryType = z.infer<typeof PostType>;
 type DetailPostQueryType = z.infer<typeof PostDetailType>;
-
-// export const prerender = true;
 
 export async function getStaticPaths() {
   const {data} = await graphqlFetch<PostQueryType>({
@@ -30,13 +27,6 @@ export async function getStaticPaths() {
 }
 
 const {slug} = Astro.params;
-
-const getUrl = import.meta.env.PROD
-  ? "https://rizkyy.dev"
-  : "http://localhost:3000";
-
-const fetchView = await fetch(`${getUrl}/api/view/${slug}`);
-const {views} = await fetchView.json();
 
 const {
   data: {post},
@@ -64,12 +54,7 @@ const {
             By Riz on
             <time class="meta-time">{parseTime(post.createdAt)}</time>
           </div>
-          <div class="flex items-center space-x-1">
-            <div class="w-4 h-4 flex items-center">
-              <Icon name="mdi:eye" />
-            </div>
-            <span>{parseNumber(views)}</span>
-          </div>
+          <CounterView />
         </div>
         <a href="/blogs">Back</a>
       </div>
