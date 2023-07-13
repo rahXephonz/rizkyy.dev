@@ -4,8 +4,7 @@ import image from "@astrojs/image";
 import sitemap from "@astrojs/sitemap";
 import markdownIntegration from "@astropub/md";
 import partytown from "@astrojs/partytown";
-import netlify from "@astrojs/netlify/functions";
-// import node from "@astrojs/node";
+import node from "@astrojs/node";
 
 export default defineConfig({
   site: "https://rizkyy.dev",
@@ -24,5 +23,7 @@ export default defineConfig({
     }),
   ],
   output: "server",
-  adapter: netlify(),
+  adapter: node({
+    mode: "standalone",
+  }),
 });
