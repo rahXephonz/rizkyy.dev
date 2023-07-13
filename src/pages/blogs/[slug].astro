@@ -1,11 +1,18 @@
 ---
 import {type z} from "astro:content";
-import {type PostType, type PostDetailType, graphqlFetch} from "@utils/all";
+import {
+  type PostType,
+  type PostDetailType,
+  graphqlFetch,
+  parseTime,
+  parseNumber,
+} from "@utils/all";
+import {Icon} from "astro-icon";
+import {Picture} from "@astrojs/image/components";
 import {postQuery, postDetailQuery} from "@graphql/query";
 import {Markdown} from "@astropub/md";
 import Container from "@components/container.astro";
 import BlogLayout from "@layouts/BlogLayout.astro";
-import {Picture} from "@astrojs/image/components";
 
 type PostQueryType = z.infer<typeof PostType>;
 type DetailPostQueryType = z.infer<typeof PostDetailType>;
@@ -22,6 +29,13 @@ export async function getStaticPaths() {
 
 const {slug} = Astro.params;
 
+const getUrl = import.meta.env.PROD
+  ? "https://rizkyy.dev"
+  : "http://localhost:3000";
+
+const fetchView = await fetch(`${getUrl}/api/view/${slug}`);
+const {views} = await fetchView.json();
+
 const {
   data: {post},
 } = await graphqlFetch<DetailPostQueryType>({
@@ -36,16 +50,24 @@ const {
   description={post.excerpt}>
   <Container>
     <div class="mt-20 text-purple-400">
-      {post.categories.map((item) => <span>#{item.name}</span>)}
+      {post.categories.map((category) => <span>#{category.name}</span>)}
     </div>
-    <h1 class="text-4xl xsm:text-3xl mt-2">
+    <h1 class="text-4xl xsm:text-3xl my-1 font-bold font-playfair">
       {post.title}
     </h1>
     <div class="meta mb-10">
       <div class="meta-content my-2 flex justify-between text-gray-400">
-        <div class="meta-inline text-[15px]">
-          Riz,
-          <time class="meta-time"> Wed Aug 31 2022</time>
+        <div class="meta-inline text-[15px] flex space-x-2 items-center">
+          <div>
+            By Riz on
+            <time class="meta-time">{parseTime(post.createdAt)}</time>
+          </div>
+          <div class="flex items-center space-x-1">
+            <div class="w-4 h-4 flex items-center">
+              <Icon name="mdi:eye" />
+            </div>
+            <span>{parseNumber(views)}</span>
+          </div>
         </div>
         <a href="/blogs">Back</a>
       </div>
@@ -55,13 +77,13 @@ const {
       <div class="meta-image">
         <Picture
           src={post.thumbnailImage.url}
-          alt="meta-blog-image"
+          alt="thumbnail-post"
           sizes="(max-width: 800px) 100vw, 800px"
           widths={[200, 400, 800]}
           aspectRatio="16:9"
-          format="webp"
           fit="cover"
           position="center"
+          format="webp"
           loading="eager"
           class="w-full rounded-md"
         />
@@ -70,6 +92,23 @@ const {
     <div class="blog-prose mt-10">
       <Markdown of={post.content} />
     </div>
+
+    <script
+      is:inline
+      src="https://giscus.app/client.js"
+      data-repo="ioofy/rizkyy.dev"
+      data-repo-id="R_kgDOJ6KTcA"
+      data-category="General"
+      data-category-id="DIC_kwDOJ6KTcM4CX2nG"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="dark_high_contrast"
+      data-lang="en"
+      crossorigin="anonymous"
+      async></script>
   </Container>
 </BlogLayout>
 

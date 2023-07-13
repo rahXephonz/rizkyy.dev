@@ -96,6 +96,18 @@ export function parseTime(time: string): string {
   return parsedTime;
 }
 
+export function parseNumber(number: number): string {
+  if (number >= 1000 && number < 1000000) {
+    return `${(number / 1000).toFixed(0)}k`;
+  }
+
+  if (number >= 1000000) {
+    return `${(number / 1000000).toFixed(0)}M`;
+  }
+
+  return number.toString();
+}
+
 export const graphqlFetch = async <T = TUniversal>(
   body: GraphqlBodyObj
 ): Promise<T> => {

@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Inter Tight", "sans-serif"],
-        ogg: ['"Ogg"', "sans-serif"],
+        playfair: ['"Playfair Display"', "sans-serif"],
       },
 
       screens: {
