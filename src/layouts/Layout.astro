@@ -19,6 +19,9 @@ const ogImage = createOgImage({
   title: "Muhamad Rizky",
   meta: "Front End Engineer at Fishlog",
 });
+
+const description =
+  "Welcome to my digital playground where i share what i'm learning. my idea also. I'm a Front End Craftsman dedicated to crafting a beautiful UI and enhancing web performance";
 ---
 
 <!DOCTYPE html>
@@ -26,7 +29,7 @@ const ogImage = createOgImage({
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -34,7 +37,7 @@ const ogImage = createOgImage({
 
     <SEO
       title={title}
-      description="Front End Craftsman dedicated to crafting a beautiful UI and enhancing web performance"
+      description={description}
       canonical={canonicalURL}
       twitter={{
         creator: "@Ioofyy",
@@ -45,9 +48,12 @@ const ogImage = createOgImage({
         basic: {
           url: canonicalURL,
           type: "website",
-          title:
-            "Front End Craftsman dedicated to enhancing web perfomance and carfting a Beautiful UI",
+          title: `Muhamad Rizky - ${title}`,
           image: ogImage,
+        },
+        optional: {
+          description,
+          siteName: "rizkyy.dev",
         },
         image: {
           alt: title,
