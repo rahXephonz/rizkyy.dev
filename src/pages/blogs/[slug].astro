@@ -29,12 +29,11 @@ const {
   query: postDetailQuery,
   variables: {slug},
 });
+
+const date = parseTime(post.createdAt);
 ---
 
-<BlogLayout
-  title={post.title}
-  urlImage={post.thumbnailImage.url}
-  description={post.excerpt}>
+<BlogLayout title={post.title} description={post.excerpt} date={date}>
   <Container>
     <div class="mt-20 text-purple-400">
       {post.categories.map((category) => <span>#{category.name}</span>)}
@@ -47,7 +46,7 @@ const {
         <div class="meta-inline text-[15px]">
           <div>
             By Riz on
-            <time class="meta-time">{parseTime(post.createdAt)}</time>
+            <time class="meta-time">{date}</time>
           </div>
         </div>
         <a href="/blogs">Back</a>

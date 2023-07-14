@@ -3,17 +3,19 @@ import {SEO} from "astro-seo";
 import Theme from "@components/theme.astro";
 import Footer from "@components/footer.astro";
 import "../styles/main.scss";
+import {createOgImage} from "@utils/createOg";
 
 export interface Props {
   title: string;
   description: string;
-  urlImage: string;
+  date: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
-const {title, urlImage, description} = Astro.props;
+const {title, description, date} = Astro.props;
 
-const resolvedImageWithDomain = new URL(urlImage, Astro.site).toString();
+const metaSiteAndDate = `rizkyy.dev · ${date}`;
+const ogImage = createOgImage({title, meta: metaSiteAndDate});
 
 const makeTitle = title && `${title}`;
 ---
@@ -43,7 +45,7 @@ const makeTitle = title && `${title}`;
           url: canonicalURL,
           type: "website",
           title: makeTitle,
-          image: resolvedImageWithDomain,
+          image: ogImage,
         },
         optional: {
           description,
