@@ -7,7 +7,7 @@ export const redis = new Redis({
 
 export const getViews = async (slug: string) => {
   const fetchIp = await fetch("https://api.ipify.org?format=json");
-  const ip = await fetchIp.json();
+  const {ip} = await fetchIp.json();
 
   if (ip) {
     // Hash the IP in order to not store it directly in your db.
