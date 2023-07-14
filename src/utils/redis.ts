@@ -1,15 +1,13 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import {type APIRoute} from "astro";
 import {Redis} from "@upstash/redis";
 
-const redis = new Redis({
+export const redis = new Redis({
   url: import.meta.env.UPSTASH_REDIS_REST_URL,
   token: import.meta.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
-export const get: APIRoute = async ({params, clientAddress}) => {
-  const {slug} = params ?? {};
-  const ip = clientAddress;
+export const getViews = async (slug: string) => {
+  const fetchIp = await fetch("https://api.ipify.org?format=json");
+  const ip = await fetchIp.json();
 
   if (ip) {
     // Hash the IP in order to not store it directly in your db.
@@ -30,9 +28,5 @@ export const get: APIRoute = async ({params, clientAddress}) => {
 
   const countView = await redis.incr(["pageviews", "all", slug].join(":"));
 
-  return {
-    body: JSON.stringify({
-      views: countView,
-    }),
-  };
+  return countView;
 };

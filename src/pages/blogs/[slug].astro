@@ -1,12 +1,8 @@
 ---
 import {type z} from "astro:content";
-import {
-  type PostType,
-  type PostDetailType,
-  graphqlFetch,
-  parseTime,
-  parseNumber,
-} from "@utils/all";
+import {type PostType, type PostDetailType, graphqlFetch} from "@utils/common";
+import {parseTime, parseNumber} from "@utils/parse";
+import {getViews} from "@utils/redis";
 import {Icon} from "astro-icon";
 import {Picture} from "@astrojs/image/components";
 import {postQuery, postDetailQuery} from "@graphql/query";
@@ -28,13 +24,7 @@ export async function getStaticPaths() {
 }
 
 const {slug} = Astro.params;
-
-const getUrl = import.meta.env.PROD
-  ? "https://rizkyy.dev"
-  : "http://localhost:3000";
-
-const fetchView = await fetch(`${getUrl}/api/view/${slug}`);
-const {views} = await fetchView.json();
+const views = await getViews(slug as string);
 
 const {
   data: {post},

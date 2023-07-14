@@ -53,19 +53,6 @@ const makeTitle = title && `${title}`;
         },
       }}
     />
-
-    <script
-      type="text/partytown"
-      src="https://www.googletagmanager.com/gtag/js?id=G-93YBNJY3Z4"></script>
-
-    <script type="text/partytown">
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-93YBNJY3Z4");
-    </script>
   </head>
   <body>
     <Navbar />
@@ -84,6 +71,21 @@ const makeTitle = title && `${title}`;
             src="https://umami.rizkyy.dev/script.js"
             data-website-id="67b6272c-99cf-409a-8950-f6bad8cf296f"
           />
+
+          <script type="text/javascript" is:inline>
+            {(function (c, l, a, r, i, t, y) {
+              c[a] =
+                c[a] ||
+                function () {
+                  (c[a].q = c[a].q || []).push(arguments);
+                };
+              t = l.createElement(r);
+              t.async = 1;
+              t.src = "https://www.clarity.ms/tag/" + i;
+              y = l.getElementsByTagName(r)[0];
+              y.parentNode.insertBefore(t, y);
+            })(window, document, "clarity", "script", "hyy9i9hhxy")}
+          </script>
         </Fragment>
       ) : null
     }
