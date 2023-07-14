@@ -1,12 +1,8 @@
 ---
 draft: false
 title: "Transform Obj"
-snippet: "Utility for manipulate a data"
-image:
-  {
-    src: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?&fit=crop&w=430&h=240",
-    alt: "frontend master",
-  }
+snippet: "Utility Tools for manipulate data object or datum"
 createdDate: "2022-07-09"
 type: "tool"
+link: "https://www.npmjs.com/package/transform-obj"
 ---

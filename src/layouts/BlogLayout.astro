@@ -16,8 +16,6 @@ const {title, description, date} = Astro.props;
 
 const metaSiteAndDate = `rizkyy.dev · ${date}`;
 const ogImage = createOgImage({title, meta: metaSiteAndDate});
-
-const makeTitle = title && `${title}`;
 ---
 
 <!DOCTYPE html>
@@ -32,7 +30,7 @@ const makeTitle = title && `${title}`;
     <meta name="generator" content={Astro.generator} />
 
     <SEO
-      title={`${makeTitle} - Blog`}
+      title={`${title} - Blog`}
       description="Frontend Engineer focussing on performance and enhancing a beautiful UI"
       canonical={canonicalURL}
       twitter={{
@@ -44,7 +42,7 @@ const makeTitle = title && `${title}`;
         basic: {
           url: canonicalURL,
           type: "website",
-          title: makeTitle,
+          title,
           image: ogImage,
         },
         optional: {

@@ -6,10 +6,13 @@ const projectCollection = defineCollection({
     title: z.string(),
     snippet: z.string(),
     type: z.string(),
-    image: z.object({
-      src: z.string(),
-      alt: z.string(),
-    }),
+    image: z
+      .object({
+        src: z.string(),
+        alt: z.string(),
+      })
+      .optional(),
+    link: z.string(),
     createdDate: z.string().transform((str) => new Date(str)),
   }),
 });

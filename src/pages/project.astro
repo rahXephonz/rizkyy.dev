@@ -1,6 +1,7 @@
 ---
 import Container from "@components/container.astro";
 import Layout from "@layouts/Layout.astro";
+import cx from "classnames";
 import {getCollection} from "astro:content";
 
 const publishedProjectEntries = await getCollection("projects", ({data}) => {
@@ -10,15 +11,23 @@ const publishedProjectEntries = await getCollection("projects", ({data}) => {
 publishedProjectEntries.sort(function getData(a, b) {
   return a.data.createdDate.valueOf() - b.data.createdDate.valueOf();
 });
+
+const isProductProjectPublished =
+  publishedProjectEntries.filter((project) => project.data.type === "product")
+    .length >= 1;
 ---
 
 <Layout title="Projects">
   <Container>
     <div class="flex flex-col space-y-3">
-      <p class="mb-3 opacity-60">
-        Here are the Product Projects i have been creating, maintaining, and
-        investing a lot of effort
-      </p>
+      {
+        isProductProjectPublished ? (
+          <p class="mb-3 opacity-60">
+            Here are the Product Projects i have been creating, maintaining, and
+            investing a lot of effort
+          </p>
+        ) : null
+      }
 
       {
         publishedProjectEntries
@@ -27,7 +36,8 @@ publishedProjectEntries.sort(function getData(a, b) {
             <Fragment>
               <a
                 class="no-underline hover:opacity-70"
-                href={`/projects/${project.slug}`}>
+                href={project.data.link}
+                target="_blank">
                 <div class="flex justify-between xsm:flex-col xsm:space-y-1 items-center xsm:items-start">
                   <p class="font-playfair text-xl font-bold opacity-80">
                     {project.data.title}
@@ -44,7 +54,10 @@ publishedProjectEntries.sort(function getData(a, b) {
       }
     </div>
 
-    <div class="flex flex-col space-y-3 mt-20">
+    <div
+      class={cx("flex flex-col space-y-3", {
+        "mt-20": isProductProjectPublished,
+      })}>
       <p class="mb-3 opacity-60">Side Projects for spent my freetime</p>
 
       {
@@ -54,7 +67,8 @@ publishedProjectEntries.sort(function getData(a, b) {
             <Fragment>
               <a
                 class="no-underline hover:opacity-70"
-                href={`/projects/${project.slug}`}>
+                href={project.data.link}
+                target="_blank">
                 <div class="flex justify-between xsm:flex-col xsm:space-y-1 items-center xsm:items-start">
                   <p class="font-playfair text-xl font-bold opacity-80">
                     {project.data.title}

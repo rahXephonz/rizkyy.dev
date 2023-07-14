@@ -10,7 +10,7 @@ export const createOgImage = ({title, meta}: {title: string; meta: string}) =>
     `w_1600,h_836,q_100`,
 
     // TITLE
-    `l_text:Arial_75:${e(title)},co_rgb:ffe4e6,c_fit,w_1400,h_240`,
+    `l_text:Arial_75:${e(title)},co_rgb:ffff,c_fit,w_1400,h_240`,
     // Positioning
     `fl_layer_apply,g_south_west,x_100,y_180`,
 

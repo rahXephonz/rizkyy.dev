@@ -9,7 +9,7 @@ const menuItems = [
   },
   {
     title: "Projects",
-    path: "/projects",
+    path: "/project",
   },
   {
     title: "About",
@@ -22,7 +22,7 @@ const [item] = menuItems.filter((i) => i.path === currentPath);
 ---
 
 <Container class="mt-16 mb-14">
-  <span class="text-2xl font-bold">{item?.title}</span>
+  <span class="text-2xl font-bold font-playfair">{item?.title}</span>
   <header class="flex justify-end xsm:mt-5">
     <nav>
       <ul class="flex justify-between space-x-5 font-sans">

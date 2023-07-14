@@ -11,10 +11,11 @@
   },
   "dependencies": {
     "@astrojs/image": "^0.14.1",
+    "@astrojs/netlify": "latest",
+    "@astrojs/node": "latest",
+    "@astrojs/rss": "^2.4.3",
     "@astrojs/sitemap": "^1.0.1",
     "@astrojs/tailwind": "^3.0.1",
-    "@astrojs/node": "latest",
-    "@astrojs/netlify": "latest",
     "@astropub/md": "latest",
     "@upstash/redis": "^1.22.0",
     "astro": "latest",
