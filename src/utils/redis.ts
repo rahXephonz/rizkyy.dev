@@ -5,6 +5,8 @@ export const redis = new Redis({
   token: import.meta.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
+// TODO: Not work if using static files
+
 export const getViews = async (slug: string) => {
   const fetchIp = await fetch("https://api.ipify.org?format=json");
   const {ip} = await fetchIp.json();

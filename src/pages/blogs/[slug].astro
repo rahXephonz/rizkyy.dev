@@ -1,9 +1,7 @@
 ---
 import {type z} from "astro:content";
 import {type PostType, type PostDetailType, graphqlFetch} from "@utils/common";
-import {parseTime, parseNumber} from "@utils/parse";
-import {getViews} from "@utils/redis";
-import {Icon} from "astro-icon";
+import {parseTime} from "@utils/parse";
 import {Picture} from "@astrojs/image/components";
 import {postQuery, postDetailQuery} from "@graphql/query";
 import {Markdown} from "@astropub/md";
@@ -24,7 +22,6 @@ export async function getStaticPaths() {
 }
 
 const {slug} = Astro.params;
-const views = await getViews(slug as string);
 
 const {
   data: {post},
@@ -47,16 +44,10 @@ const {
     </h1>
     <div class="meta mb-10">
       <div class="meta-content my-2 flex justify-between text-gray-400">
-        <div class="meta-inline text-[15px] flex space-x-2 items-center">
+        <div class="meta-inline text-[15px]">
           <div>
             By Riz on
             <time class="meta-time">{parseTime(post.createdAt)}</time>
-          </div>
-          <div class="flex items-center space-x-1">
-            <div class="w-4 h-4 flex items-center">
-              <Icon name="mdi:eye" />
-            </div>
-            <span>{parseNumber(views)}</span>
           </div>
         </div>
         <a href="/blogs">Back</a>

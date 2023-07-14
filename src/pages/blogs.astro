@@ -3,10 +3,8 @@ import {postQuery} from "@graphql/query";
 import {type z} from "astro:content";
 import {Picture} from "@astrojs/image/components";
 import {graphqlFetch, type PostType} from "@utils/common";
-import {parseNumber, parseTimestamp} from "@utils/parse";
-import {redis} from "@utils/redis";
+import {parseTimestamp} from "@utils/parse";
 
-import Icon from "astro-icon";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 
@@ -23,17 +21,6 @@ const {
 });
 
 const posts = postsConnection.edges;
-
-const views = (
-  await redis.mget<number[]>(
-    ...postsConnection.edges.map((p) =>
-      ["pageviews", "all", p.node.slug].join(":")
-    )
-  )
-).reduce((acc, v, i) => {
-  acc[postsConnection.edges[i].node.slug] = v ?? 0;
-  return acc;
-}, {} as Record<string, number>);
 ---
 
 <Layout title="Blogs">
@@ -61,18 +48,10 @@ const views = (
                   <span class="text-purple-400 text-sm">#{item.name}</span>
                 ))}
               </div>
-              <div class="flex space-x-1 items-center">
+              <div>
                 <time class="text-gray-400 text-sm font-sans meta-time">
                   {parseTimestamp(posts[0].node.createdAt)}
                 </time>
-                <div class="flex items-center space-x-1 opacity-60">
-                  <div class="w-4 h-4 flex items-center">
-                    <Icon name="mdi:eye" />
-                  </div>
-                  <span class="text-[13px]">
-                    {parseNumber(views[posts[0].node.slug] ?? 0)}
-                  </span>
-                </div>
               </div>
 
               <div class="mt-2 meta-content">
@@ -103,20 +82,10 @@ const views = (
                   />
                 </div>
                 <div class="w-1/2 xsm:w-full">
-                  <div class="flex space-x-1">
-                    {item.node.categories.map((c) => (
-                      <span class="text-purple-400 text-[13px]">#{c.name}</span>
-                    ))}
+                  {item.node.categories.map((c) => (
+                    <span class="text-purple-400 text-[13px]">#{c.name}</span>
+                  ))}
 
-                    <div class="flex items-center space-x-1 opacity-60 mt-[1px]">
-                      <div class="w-4 h-4 flex items-center">
-                        <Icon name="mdi:eye" />
-                      </div>
-                      <span class="text-[13px]">
-                        {parseNumber(views[item.node.slug] ?? 0)}
-                      </span>
-                    </div>
-                  </div>
                   <p class="font-playfair text-gray-400 mt-3">
                     {item.node.title}
                   </p>
@@ -135,20 +104,10 @@ const views = (
         {
           posts.splice(posts.length >= 3 ? 1 : 0).map((item) => (
             <Fragment>
-              <div class="flex space-x-1">
-                {item.node.categories.map((c) => (
-                  <span class="text-purple-400 text-[13px]">#{c.name}</span>
-                ))}
+              {item.node.categories.map((c) => (
+                <span class="text-purple-400 text-[13px]">#{c.name}</span>
+              ))}
 
-                <div class="flex items-center space-x-1 opacity-60 mt-[1px]">
-                  <div class="w-4 h-4 flex items-center">
-                    <Icon name="mdi:eye" />
-                  </div>
-                  <span class="text-[13px]">
-                    {parseNumber(views[item.node.slug] ?? 0)}
-                  </span>
-                </div>
-              </div>
               <a
                 href={`/blogs/${item.node.slug}`}
                 class="no-underline hover:opacity-70">

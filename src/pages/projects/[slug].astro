@@ -2,14 +2,10 @@
 import {getCollection} from "astro:content";
 import {Markdown} from "@astropub/md";
 import {Picture} from "@astrojs/image/components";
-import {parseNumber, parseTime} from "@utils/parse";
-import {getViews} from "@utils/redis";
+import {parseTime} from "@utils/parse";
 
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
-import Icon from "astro-icon";
-
-export const prerender = true;
 
 export async function getStaticPaths() {
   const projectEntries = await getCollection("projects");
@@ -20,8 +16,6 @@ export async function getStaticPaths() {
 }
 
 const {entry} = Astro.props;
-const {slug} = Astro.params;
-const views = await getViews(slug as string);
 ---
 
 <Layout title={entry.data.title}>
@@ -33,19 +27,9 @@ const views = await getViews(slug as string);
           class="flex justify-between items-center mt-3 xsm:flex-col xsm:items-start">
           <p>{entry.data.snippet}</p>
 
-          <div class="flex space-x-1 items-center">
-            <time class="text-gray-400 text-sm font-sans meta-time">
-              {parseTime(entry.data.createdDate)}
-            </time>
-            <div class="flex items-center space-x-1 text-gray-400">
-              <div class="w-4 h-4 flex items-center">
-                <Icon name="mdi:eye" />
-              </div>
-              <span class="text-[13px]">
-                {parseNumber(views ?? 0)}
-              </span>
-            </div>
-          </div>
+          <time class="text-gray-400 text-sm font-sans meta-time">
+            {parseTime(entry.data.createdDate)}
+          </time>
         </div>
       </div>
       <div class="meta-image mt-10">
