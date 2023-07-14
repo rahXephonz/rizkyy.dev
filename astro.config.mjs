@@ -3,7 +3,8 @@ import tailwind from "@astrojs/tailwind";
 import image from "@astrojs/image";
 import sitemap from "@astrojs/sitemap";
 import markdownIntegration from "@astropub/md";
-import netlify from "@astrojs/netlify/functions";
+import node from "@astrojs/node";
+// import netlify from "@astrojs/netlify/functions";
 
 export default defineConfig({
   site: "https://rizkyy.dev",
@@ -16,5 +17,5 @@ export default defineConfig({
     sitemap(),
   ],
   output: "server",
-  adapter: netlify(),
+  adapter: node(),
 });
