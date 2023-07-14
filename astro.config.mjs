@@ -17,5 +17,5 @@ export default defineConfig({
     sitemap(),
   ],
   output: "server",
-  adapter: node(),
+  adapter: node({mode: "standalone"}),
 });
