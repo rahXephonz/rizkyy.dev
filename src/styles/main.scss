@@ -5,6 +5,45 @@
 html.dark {
   background-color: #18191b;
   color: #ffff;
+
+  .blog-prose {
+    p {
+      code {
+        background: #373c49;
+        color: #ffff;
+      }
+    }
+
+    pre {
+      background-color: #24292e !important;
+    }
+  }
+
+  hr {
+    border: 0.1px solid rgb(90, 89, 89);
+  }
+}
+
+html.light {
+  background-color: #f5efe7;
+  .blog-prose {
+    p {
+      code {
+        background: #f7f7fe;
+        border: 0.5px solid black;
+        color: #18191b;
+        font-weight: bold;
+      }
+    }
+
+    pre {
+      background-color: #f7f7f7 !important;
+    }
+  }
+
+  hr {
+    border: 0.1px solid rgb(195, 193, 193);
+  }
 }
 
 img {
@@ -41,10 +80,7 @@ a {
   p {
     code {
       padding: 5px;
-      background: #373c49;
-      color: #fff;
       border-radius: 2px;
-
       font-size: 14px;
       font-family: "IBM Plex Mono", monospace;
       margin: 0 2px;
@@ -62,7 +98,6 @@ a {
   pre {
     padding: 1em;
     border-radius: 5px;
-    background-color: #24292e !important;
     overflow-x: auto !important;
   }
 
@@ -70,11 +105,6 @@ a {
     code {
       font-family: "IBM Plex Mono", monospace;
       font-size: 14px;
-      .hljs-tag,
-      .hljs-function,
-      .hljs-params {
-        color: #fff;
-      }
     }
   }
 
@@ -110,6 +140,11 @@ a {
   a,
   strong {
     color: #ff8989;
+  }
+
+  strong {
+    font-weight: bold;
+    font-family: "IBM Plex Mono", monospace;
   }
 
   h2,

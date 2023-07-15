@@ -1,7 +1,6 @@
 ---
 import {SEO} from "astro-seo";
 import {createOgImage} from "@utils/createOgImage";
-import Theme from "@components/theme.astro";
 import Footer from "@components/footer.astro";
 import "../styles/main.scss";
 
@@ -58,7 +57,7 @@ const ogImage = createOgImage({title, meta: metaSiteAndDate});
   <body>
     <slot />
     <Footer />
-    <Theme />
+
     {
       import.meta.env.PROD ? (
         <Fragment>
@@ -86,5 +85,29 @@ const ogImage = createOgImage({title, meta: metaSiteAndDate});
         </Fragment>
       ) : null
     }
+
+    <script is:inline>
+      const theme = (() => {
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+          return "dark";
+
+        return "light";
+      })();
+
+      if (theme === "light") {
+        document.documentElement.classList.add("light");
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "/css/hljs-xcode.css";
+        document.head.appendChild(link);
+      } else {
+        document.documentElement.classList.add("dark");
+
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "/css/hljs-github-dark.css";
+        document.head.appendChild(link);
+      }
+    </script>
   </body>
 </html>
