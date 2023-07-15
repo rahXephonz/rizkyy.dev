@@ -36,7 +36,11 @@ const date = parseTime(post.createdAt);
 <BlogLayout title={post.title} description={post.excerpt} date={date}>
   <Container>
     <div class="mt-20 text-purple-400 flex space-x-2 items-center">
-      {post.categories.map((category) => <span>#{category.name}</span>)}
+      {
+        post.categories.map((category) => (
+          <span class="text-sm">#{category.name}</span>
+        ))
+      }
     </div>
     <h1 class="text-4xl xsm:text-3xl my-1 font-bold font-playfair">
       {post.title}
@@ -64,7 +68,7 @@ const date = parseTime(post.createdAt);
           fit="cover"
           position="center"
           format="webp"
-          loading="lazy"
+          loading="eager"
           class="w-full rounded-md"
         />
       </div>
