@@ -7,7 +7,6 @@ import markdownIntegration from "@astropub/md";
 
 export default defineConfig({
   schema: rssSchema,
-  trailingSlash: "never",
   site: "https://rizkyy.dev",
   integrations: [
     tailwind(),

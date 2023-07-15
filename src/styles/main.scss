@@ -46,6 +46,7 @@ a {
       border-radius: 2px;
 
       font-size: 14px;
+      font-family: "IBM Plex Mono", monospace;
       margin: 0 2px;
     }
   }
@@ -61,6 +62,8 @@ a {
   pre {
     padding: 1em;
     border-radius: 5px;
+    background-color: #24292e !important;
+    overflow-x: auto !important;
   }
 
   pre {
@@ -77,11 +80,11 @@ a {
 
   blockquote {
     border-left: 2px solid rgb(61, 68, 83);
-    padding-left: 15px;
-    font-family: "IBM Plex Mono", monospace;
+    padding-left: 16px;
+    font-style: italic;
     p {
       opacity: 0.9;
-      line-height: 1.2em;
+      line-height: 1.5em;
     }
   }
 
@@ -102,6 +105,10 @@ a {
   h3 {
     font-size: 1.3rem;
     font-weight: bold;
+  }
+
+  a {
+    color: pink;
   }
 
   h2,

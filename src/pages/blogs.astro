@@ -103,11 +103,12 @@ const posts = postsConnection.edges;
       <li class="mt-3">
         {
           posts.splice(posts.length >= 3 ? 1 : 0).map((item) => (
-            <Fragment>
-              {item.node.categories.map((c) => (
-                <span class="text-purple-400 text-[13px]">#{c.name}</span>
-              ))}
-
+            <div class="mt-4">
+              <div class="flex space-x-2 items-center">
+                {item.node.categories.map((c) => (
+                  <span class="text-purple-400 text-[13px]">#{c.name}</span>
+                ))}
+              </div>
               <a
                 href={`/blogs/${item.node.slug}`}
                 class="no-underline hover:opacity-70">
@@ -121,7 +122,7 @@ const posts = postsConnection.edges;
                   </time>
                 </div>
               </a>
-            </Fragment>
+            </div>
           ))
         }
       </li>

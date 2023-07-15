@@ -1,8 +1,9 @@
 // double escape for commas and slashes
-const e = (str: string) => encodeURIComponent(encodeURIComponent(str));
+const metaContent = (str: string) =>
+  encodeURIComponent(encodeURIComponent(str));
 
-export const createOgImage = ({title, meta}: {title: string; meta: string}) =>
-  [
+export const createOgImage = ({title, meta}: {title: string; meta: string}) => {
+  return [
     // ACCOUNT PREFIX
     // Add your own Cloudinary account ID.
     `https://res.cloudinary.com/flawns-site/image/upload`,
@@ -10,13 +11,13 @@ export const createOgImage = ({title, meta}: {title: string; meta: string}) =>
     `w_1600,h_836,q_100`,
 
     // TITLE
-    `l_text:Arial_75:${e(title)},co_rgb:ffff,c_fit,w_1400,h_240`,
+    `l_text:Arial_75:${metaContent(title)},co_rgb:ffff,c_fit,w_1400,h_240`,
     // Positioning
     `fl_layer_apply,g_south_west,x_100,y_180`,
 
-    // META
+    // OTHER META
     // Arial, but smaller
-    `l_text:Arial_48:${e(meta)},co_rgb:ffe4e680,c_fit,w_1400`,
+    `l_text:Arial_48:${metaContent(meta)},co_rgb:ffe4e680,c_fit,w_1400`,
     // Positioning
     `fl_layer_apply,g_south_west,x_100,y_100`,
 
@@ -31,3 +32,4 @@ export const createOgImage = ({title, meta}: {title: string; meta: string}) =>
     // BG
     `bg-gradient_x8l41v.jpg`,
   ].join("/");
+};
