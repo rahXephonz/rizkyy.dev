@@ -89,7 +89,7 @@ a {
   }
 
   ul {
-    list-style-type: square;
+    list-style-type: inherit;
     padding: 0px 15px;
     li {
       font-size: 16px;
@@ -98,7 +98,7 @@ a {
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold;
   }
 
@@ -120,11 +120,11 @@ a {
   }
 
   p {
-    font-size: 16px;
-    line-height: 1.7em;
+    font-size: 16.5px;
+    line-height: 1.6em;
     opacity: 0.8;
 
-    @media screen and (max-width: 428px) {
+    @media screen and (max-width: 540px) {
       font-size: 15px;
     }
   }
