@@ -80,7 +80,7 @@ a {
 
   blockquote {
     border-left: 2px solid rgb(61, 68, 83);
-    padding-left: 16px;
+    padding-left: 15px;
     font-style: italic;
     p {
       opacity: 0.9;
@@ -107,8 +107,9 @@ a {
     font-weight: bold;
   }
 
-  a {
-    color: pink;
+  a,
+  strong {
+    color: #ff8989;
   }
 
   h2,
@@ -124,7 +125,7 @@ a {
     opacity: 0.8;
 
     @media screen and (max-width: 428px) {
-      font-size: 16px;
+      font-size: 15px;
     }
   }
 
@@ -162,7 +163,7 @@ a {
     }
     blockquote {
       p {
-        font-size: 1.5rem !important;
+        font-size: 0.9rem !important;
       }
     }
   }
