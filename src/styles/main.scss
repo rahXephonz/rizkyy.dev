@@ -2,6 +2,14 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,400;1,500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap");
 
+.noise-bg {
+  background-image: url("/noise.png");
+  position: fixed;
+  inset: 0;
+  mix-blend-mode: hard-light;
+  pointer-events: none;
+}
+
 html.dark {
   background-color: #18191b;
   color: #ffff;
@@ -23,10 +31,14 @@ html.dark {
   hr {
     border: 0.1px solid rgb(90, 89, 89);
   }
+
+  .fhl {
+    color: yellow;
+  }
 }
 
 html.light {
-  background-color: #f5efe7;
+  background-color: hsl(0, 0%, 93%);
   .blog-prose {
     p,
     li {
@@ -45,6 +57,10 @@ html.light {
 
   hr {
     border: 0.1px solid rgb(195, 193, 193);
+  }
+
+  .fhl {
+    color: rgb(206, 109, 39);
   }
 }
 
@@ -74,13 +90,16 @@ a {
   tbody,
   tr,
   th,
-  td,
-  img {
+  td {
     margin: 25px 0px;
   }
 
   figure {
-    margin: 10px 0px;
+    margin: 20px 0px;
+
+    figcaption {
+      margin: 10px;
+    }
   }
 
   p,
