@@ -1,10 +1,15 @@
 ---
 import {type z} from "astro:content";
-import {type PostType, type PostDetailType, graphqlFetch} from "@utils/common";
+import {
+  type PostType,
+  type PostDetailType,
+  graphqlFetch,
+  replaceImageContent,
+} from "@utils/common";
 import {parseTime} from "@utils/parse";
 import {Picture} from "@astrojs/image/components";
 import {postQuery, postDetailQuery} from "@graphql/query";
-import {Markdown} from "@astropub/md";
+import {markdown} from "@astropub/md";
 import Container from "@components/container.astro";
 import BlogLayout from "@layouts/BlogLayout.astro";
 
@@ -31,6 +36,9 @@ const {
 });
 
 const date = parseTime(post.createdAt);
+const html = await markdown(post.content);
+
+const updatedHtmlContent = replaceImageContent(html.toString());
 ---
 
 <BlogLayout title={post.title} description={post.excerpt} date={date}>
@@ -74,7 +82,7 @@ const date = parseTime(post.createdAt);
       </div>
     </div>
     <div class="blog-prose mt-10">
-      <Markdown of={post.content} />
+      <Fragment set:html={updatedHtmlContent} />
     </div>
 
     {

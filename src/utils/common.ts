@@ -1,4 +1,5 @@
 import {z} from "astro:content";
+import * as cheerio from "cheerio";
 
 type GraphqlBodyObj = {
   query: TUniversal;
@@ -82,3 +83,35 @@ export const graphqlFetch = async <T = TUniversal>(
 
   return data.json() as T;
 };
+
+export function replaceImageContent(htmlContent: string) {
+  // Load the HTML content
+  const $ = cheerio.load(htmlContent);
+
+  // Find the <img> tags
+  const imgTags = $("img");
+
+  // Replace each <img> tag with the Astro component
+  imgTags.each(function replaceImg() {
+    const imageUrl = $(this).attr("src");
+    const altText = $(this).attr("alt");
+
+    // Create the Astro component string
+    const astroComponent = `
+      <figure>
+        <picture>
+          <img src="${imageUrl}" alt="${altText}" sizes="(max-width: 800px) 100vw, 800px" width="800px" height="400px" loading="eager" class="max-w-full rounded-md" />
+        </picture>
+        <figcaption class="text-center text-gray-400">${altText}</figcaption>
+      </figure>
+    `;
+
+    // Replace the <img> tag with the Astro component
+    $(this).replaceWith(astroComponent);
+  });
+
+  const bodyContent = $("body").html();
+
+  // Return the modified HTML content
+  return bodyContent;
+}

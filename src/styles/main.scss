@@ -7,7 +7,8 @@ html.dark {
   color: #ffff;
 
   .blog-prose {
-    p {
+    p,
+    li {
       code {
         background: #373c49;
         color: #ffff;
@@ -27,7 +28,8 @@ html.dark {
 html.light {
   background-color: #f5efe7;
   .blog-prose {
-    p {
+    p,
+    li {
       code {
         background: #f7f7fe;
         border: 0.5px solid black;
@@ -69,6 +71,7 @@ a {
   table,
   thead,
   blockquote,
+  figure,
   tbody,
   tr,
   th,
@@ -77,7 +80,8 @@ a {
     margin: 25px 0px;
   }
 
-  p {
+  p,
+  li {
     code {
       padding: 5px;
       border-radius: 2px;
