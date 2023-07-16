@@ -13,6 +13,7 @@ export const PostType = z.object({
         z.object({
           node: z.object({
             excerpt: z.string(),
+            content: z.string(),
             title: z.string(),
             slug: z.string(),
             id: z.string(),
@@ -114,4 +115,25 @@ export function replaceImageContent(htmlContent: string) {
 
   // Return the modified HTML content
   return bodyContent;
+}
+
+export function calculateReadingTime(
+  markdownContent: string,
+  averageReadingSpeed = 250
+): number {
+  // Convert Markdown content to plain text
+  const plainText = markdownContent
+    .replace(/#|##|###|####|#####|######/g, "") // Remove headers
+    .replace(/\[(.*?)\]\((.*?)\)/g, "$1") // Remove links
+    .replace(/\*\*(.*?)\*\*/g, "$1") // Remove bold text
+    .replace(/\*(.*?)\*/g, "$1") // Remove italic text
+    .replace(/`([^`]+)`/g, "$1"); // Remove code snippets
+
+  // Count the number of words in plain text content
+  const wordCount = plainText.trim().split(/\s+/).length;
+
+  // Calculate the estimated reading time
+  const readingTime = Math.ceil(wordCount / averageReadingSpeed);
+
+  return readingTime;
 }

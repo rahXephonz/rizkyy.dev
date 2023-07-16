@@ -5,6 +5,7 @@ import {
   type PostDetailType,
   graphqlFetch,
   replaceImageContent,
+  calculateReadingTime,
 } from "@utils/common";
 import {parseTime} from "@utils/parse";
 import {Picture} from "@astrojs/image/components";
@@ -55,11 +56,17 @@ const updatedHtmlContent = replaceImageContent(html.toString());
     </h1>
     <div class="meta mb-10">
       <div class="meta-content my-2 flex justify-between text-gray-400">
-        <div class="meta-inline text-[15px]">
+        <div class="meta-inline text-[15px] flex space-x-2 items-center">
           <div>
             By Riz on
             <time class="meta-time">{date}</time>
           </div>
+          <p class="text-sm">
+            ☕{" "}
+            <span class="text-gray-400 ml-[2px]">
+              {calculateReadingTime(post.content)} mnt read
+            </span>
+          </p>
         </div>
         <a href="/blogs">Back</a>
       </div>

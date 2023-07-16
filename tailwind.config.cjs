@@ -26,10 +26,10 @@ module.exports = {
         sm: {max: "820px"},
         // => @media (max-width: 820px) { ... }
 
-        xsm: {max: "540px"},
-        // => @media (max-width: 540px) { ... }
+        xsm: {max: "768px"},
+        // => @media (max-width: 768px) { ... }
 
-        mobile: {max: "428px"},
+        mobile: {max: "540px"},
         // => @media (max-width: 428px) { ... }
       },
     },

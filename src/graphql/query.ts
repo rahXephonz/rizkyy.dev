@@ -7,6 +7,7 @@ export const postQuery = `
           excerpt
           title
           slug
+          content
           createdAt
           categories {
             name
