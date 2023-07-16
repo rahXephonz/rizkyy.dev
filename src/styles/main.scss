@@ -71,13 +71,16 @@ a {
   table,
   thead,
   blockquote,
-  figure,
   tbody,
   tr,
   th,
   td,
   img {
     margin: 25px 0px;
+  }
+
+  figure {
+    margin: 10px 0px;
   }
 
   p,
