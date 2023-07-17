@@ -46,7 +46,7 @@ const updatedHtmlContent = replaceImageContent(html.toString());
 <BlogLayout title={post.title} description={post.excerpt} date={date}>
   <Fragment>
     <TableOfContent client:load markdownContents={post.content} />
-    <Container class="border-l border-gray-600">
+    <Container class="border-l 2xl:border-none border-gray-600">
       <div
         class="mt-20 text-purple-400 flex space-x-2 items-center meta-categories">
         {
