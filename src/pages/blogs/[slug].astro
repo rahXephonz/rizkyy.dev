@@ -47,10 +47,11 @@ const updatedHtmlContent = replaceImageContent(html.toString());
   <Fragment>
     <TableOfContent client:load markdownContents={post.content} />
     <Container class="border-l border-gray-600">
-      <div class="mt-20 text-purple-400 flex space-x-2 items-center">
+      <div
+        class="mt-20 text-purple-400 flex space-x-2 items-center meta-categories">
         {
           post.categories.map((category) => (
-            <span class="text-sm">#{category.name}</span>
+            <span class="text-[15px]">#{category.name}</span>
           ))
         }
       </div>
@@ -67,7 +68,7 @@ const updatedHtmlContent = replaceImageContent(html.toString());
             <p class="text-sm">
               ☕{" "}
               <span class="text-gray-400 ml-[2px]">
-                {calculateReadingTime(post.content)} mnt read
+                {calculateReadingTime(post.content)} min read
               </span>
             </p>
           </div>

@@ -11,8 +11,8 @@ const TableOfContent = ({markdownContents}: {markdownContents: string}) => {
   return (
     <div
       className={cx(
-        "fixed w-[19%] left-20 transition-all",
-        "duration-300 ease-in-out block 2xl:hidden p-5",
+        "fixed w-1/5 left-28 transition-all",
+        "duration-300 ease-in-out block 2xl:hidden p-8",
         {
           "top-20": !isScrolling,
           "top-0": isScrolling,
@@ -31,11 +31,11 @@ const TableOfContent = ({markdownContents}: {markdownContents: string}) => {
             className={cx(
               "no-underline text-gray-400 transition-all duration-300 ease-in-out",
               {
-                "ml-4 text-[15px]":
-                  item.level === 3 || contentSlug === item.slug,
+                "ml-4 text-[15px]": item.level === 3,
+                "ml-6": item.level === 3 && contentSlug === item.slug,
                 "text-[16px]": item.level !== 3,
                 "text-[#3AA6B9] ml-[5px]": contentSlug === item.slug,
-                "border-l px-[7px] border-[#3AA6B9] text-[15px]":
+                "border-l-2 px-[7px] border-[#3AA6B9] text-[15px]":
                   contentSlug === item.slug,
               }
             )}>

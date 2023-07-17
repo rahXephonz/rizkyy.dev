@@ -42,7 +42,7 @@ const posts = postsConnection.edges;
             <div class="meta">
               <div class="meta-categories flex items-center space-x-2">
                 {posts[0].node.categories.map((item) => (
-                  <span class="text-purple-400 text-sm xsm:text-lg mobile:text-sm">
+                  <span class="text-purple-400 text-[14px] xsm:text-lg mobile:text-sm">
                     #{item.name}
                   </span>
                 ))}
@@ -87,9 +87,9 @@ const posts = postsConnection.edges;
                   />
                 </div>
                 <div class="w-1/2 xsm:w-full">
-                  <div class="flex space-x-2 items-center xsm:mt-2">
+                  <div class="flex space-x-2 items-center xsm:mt-2 meta-categories">
                     {item.node.categories.map((c) => (
-                      <span class="text-purple-400 text-[13px] xsm:text-lg mobile:text-sm">
+                      <span class="text-purple-400 text-[14px] xsm:text-lg mobile:text-sm">
                         #{c.name}
                       </span>
                     ))}
@@ -129,9 +129,11 @@ const posts = postsConnection.edges;
           posts.splice(0).map((item) => (
             <div class="mt-5">
               <div class="flex space-x-2 items-center">
-                {item.node.categories.map((c) => (
-                  <span class="text-purple-400 text-[13px]">#{c.name}</span>
-                ))}
+                <div class="meta-categories flex items-center space-x-2">
+                  {item.node.categories.map((c) => (
+                    <span class="text-purple-400 text-[14px]">#{c.name}</span>
+                  ))}
+                </div>
                 <p class="text-[13px]">
                   ☕{" "}
                   <span class="text-gray-400 ml-[2px]">
