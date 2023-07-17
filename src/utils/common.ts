@@ -1,10 +1,19 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable import/no-extraneous-dependencies */
 import {z} from "astro:content";
 import * as cheerio from "cheerio";
+import MarkdownIt from "markdown-it";
 
 type GraphqlBodyObj = {
   query: TUniversal;
   variables?: Object;
 };
+
+interface TocItem {
+  content: string;
+  slug: string;
+  level: number;
+}
 
 export const PostType = z.object({
   data: z.object({
@@ -136,4 +145,29 @@ export function calculateReadingTime(
   const readingTime = Math.ceil(wordCount / averageReadingSpeed);
 
   return readingTime;
+}
+
+export function generateTableOfContents(markdownContent: string): TocItem[] {
+  const md = new MarkdownIt();
+  const tokens = md.parse(markdownContent, {});
+  const tocItems: TocItem[] = [];
+
+  for (const token of tokens) {
+    if (token.type === "heading_open") {
+      const headingLevel = Number(token.tag.slice(1)); // Extract heading level from the tag
+      const headingContentToken = tokens[tokens.indexOf(token) + 1]; // Get the next token for heading content
+      const slug = headingContentToken.content
+        .toLowerCase()
+        .replace(/[\s]+/g, "-") // Convert spaces to dashes
+        .replace(/[^\w-]+/g, ""); // Remove non-word characters except dashes
+
+      tocItems.push({
+        content: headingContentToken.content,
+        slug,
+        level: headingLevel,
+      });
+    }
+  }
+
+  return tocItems;
 }

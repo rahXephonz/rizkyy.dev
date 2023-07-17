@@ -12,6 +12,7 @@ import {Picture} from "@astrojs/image/components";
 import {postQuery, postDetailQuery} from "@graphql/query";
 import {markdown} from "@astropub/md";
 import Container from "@components/container.astro";
+import TableOfContent from "@components/table-of-content";
 import BlogLayout from "@layouts/BlogLayout.astro";
 
 type PostQueryType = z.infer<typeof PostType>;
@@ -43,77 +44,80 @@ const updatedHtmlContent = replaceImageContent(html.toString());
 ---
 
 <BlogLayout title={post.title} description={post.excerpt} date={date}>
-  <Container>
-    <div class="mt-20 text-purple-400 flex space-x-2 items-center">
-      {
-        post.categories.map((category) => (
-          <span class="text-sm">#{category.name}</span>
-        ))
-      }
-    </div>
-    <h1 class="text-4xl xsm:text-3xl my-1 font-bold font-playfair">
-      {post.title}
-    </h1>
-    <div class="meta mb-10">
-      <div class="meta-content my-2 flex justify-between text-gray-400">
-        <div class="meta-inline text-[15px] flex space-x-2 items-center">
-          <div>
-            By Riz on
-            <time class="meta-time">{date}</time>
+  <Fragment>
+    <TableOfContent client:load markdownContents={post.content} />
+    <Container class="border-l border-gray-600">
+      <div class="mt-20 text-purple-400 flex space-x-2 items-center">
+        {
+          post.categories.map((category) => (
+            <span class="text-sm">#{category.name}</span>
+          ))
+        }
+      </div>
+      <h1 class="text-4xl xsm:text-3xl my-1 font-bold font-playfair">
+        {post.title}
+      </h1>
+      <div class="meta mb-10">
+        <div class="meta-content my-2 flex justify-between text-gray-400">
+          <div class="meta-inline text-[15px] flex space-x-2 items-center">
+            <div>
+              By Riz on
+              <time class="meta-time">{date}</time>
+            </div>
+            <p class="text-sm">
+              ☕{" "}
+              <span class="text-gray-400 ml-[2px]">
+                {calculateReadingTime(post.content)} mnt read
+              </span>
+            </p>
           </div>
-          <p class="text-sm">
-            ☕{" "}
-            <span class="text-gray-400 ml-[2px]">
-              {calculateReadingTime(post.content)} mnt read
-            </span>
-          </p>
+          <a href="/blogs">Back</a>
         </div>
-        <a href="/blogs">Back</a>
       </div>
-    </div>
 
-    <div>
-      <div class="meta-image">
-        <Picture
-          src={post.thumbnailImage.url}
-          alt="thumbnail-post"
-          sizes="(max-width: 800px) 100vw, 800px"
-          widths={[200, 400, 800]}
-          aspectRatio="16:9"
-          fit="cover"
-          position="center"
-          format="webp"
-          loading="eager"
-          class="w-full rounded-md"
-        />
+      <div>
+        <div class="meta-image">
+          <Picture
+            src={post.thumbnailImage.url}
+            alt="thumbnail-post"
+            sizes="(max-width: 800px) 100vw, 800px"
+            widths={[200, 400, 800]}
+            aspectRatio="16:9"
+            fit="cover"
+            position="center"
+            format="webp"
+            loading="eager"
+            class="w-full rounded-md"
+          />
+        </div>
       </div>
-    </div>
-    <div class="blog-prose mt-10">
-      <Fragment set:html={updatedHtmlContent} />
-    </div>
+      <div class="blog-prose mt-10">
+        <Fragment set:html={updatedHtmlContent} />
+      </div>
 
-    {
-      import.meta.env.PROD ? (
-        <script
-          src="https://giscus.app/client.js"
-          data-repo="ioofy/rizkyy.dev"
-          data-repo-id="R_kgDOJ7KWXQ"
-          data-category="General"
-          data-category-id="DIC_kwDOJ7KWXc4CX4Ft"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="bottom"
-          data-theme="preferred_color_scheme"
-          data-lang="en"
-          data-loading="lazy"
-          crossorigin="anonymous"
-          async
-        />
-      ) : null
-    }
-  </Container>
+      {
+        import.meta.env.PROD ? (
+          <script
+            src="https://giscus.app/client.js"
+            data-repo="ioofy/rizkyy.dev"
+            data-repo-id="R_kgDOJ7KWXQ"
+            data-category="General"
+            data-category-id="DIC_kwDOJ7KWXc4CX4Ft"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async
+          />
+        ) : null
+      }
+    </Container>
+  </Fragment>
 </BlogLayout>
 
 <script src="/js/highlight.min.js" is:inline></script>

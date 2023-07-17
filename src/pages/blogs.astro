@@ -14,10 +14,7 @@ const {
   data: {postsConnection},
 } = await graphqlFetch<PostQueryType>({
   query: postQuery,
-  variables: {
-    first: 10,
-    skip: 0,
-  },
+  variables: {first: 10, skip: 0},
 });
 
 const posts = postsConnection.edges;
@@ -57,7 +54,7 @@ const posts = postsConnection.edges;
                 <p class="text-sm">
                   ☕{" "}
                   <span class="text-gray-400 ml-[2px]">
-                    {calculateReadingTime(posts[0].node.content)} mnt read
+                    {calculateReadingTime(posts[0].node.content)} min read
                   </span>
                 </p>
               </div>
@@ -104,7 +101,7 @@ const posts = postsConnection.edges;
                     <p class="text-[13px]">
                       ☕{" "}
                       <span class="text-gray-400 ml-[2px]">
-                        {calculateReadingTime(item.node.content)} mnt read
+                        {calculateReadingTime(item.node.content)} min read
                       </span>
                     </p>
                   </div>
@@ -125,12 +122,12 @@ const posts = postsConnection.edges;
     }
 
     <ul class="list-of-blog">
-      <p class="mb-3 text-xl font-playfair">All Bλog Posts</p>
+      <p class="mb-3 text-xl font-playfair">All Bλog Posts ✍️</p>
       <hr class="opacity-40" />
       <li class="mt-3">
         {
           posts.splice(0).map((item) => (
-            <div class="mt-4">
+            <div class="mt-5">
               <div class="flex space-x-2 items-center">
                 {item.node.categories.map((c) => (
                   <span class="text-purple-400 text-[13px]">#{c.name}</span>
@@ -138,7 +135,7 @@ const posts = postsConnection.edges;
                 <p class="text-[13px]">
                   ☕{" "}
                   <span class="text-gray-400 ml-[2px]">
-                    {calculateReadingTime(item.node.content)} mnt read
+                    {calculateReadingTime(item.node.content)} min read
                   </span>
                 </p>
               </div>

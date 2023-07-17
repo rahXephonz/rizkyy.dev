@@ -4,6 +4,7 @@ import tailwind from "@astrojs/tailwind";
 import image from "@astrojs/image";
 import sitemap from "@astrojs/sitemap";
 import markdownIntegration from "@astropub/md";
+import react from "@astrojs/react";
 
 export default defineConfig({
   schema: rssSchema,
@@ -15,5 +16,6 @@ export default defineConfig({
     }),
     markdownIntegration(),
     sitemap(),
+    react(),
   ],
 });
