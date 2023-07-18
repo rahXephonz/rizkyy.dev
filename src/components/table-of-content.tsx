@@ -7,10 +7,15 @@ const TableOfContent = ({markdownContents}: {markdownContents: string}) => {
   const isScrolling = useScroll();
   const tableOfContents = generateTableOfContents(markdownContents);
   const [contentSlug, setContentSlug] = useState<string>("");
+  const [manuallySet, setManuallySet] = useState<boolean>(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
+  const handleScroll = () => {
+    if (!manuallySet) {
       const currentPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const maxScrollHeight =
+        document.documentElement.scrollHeight - windowHeight;
+
       const sections = tableOfContents.map((item) => item.slug);
 
       // eslint-disable-next-line no-plusplus
@@ -30,20 +35,35 @@ const TableOfContent = ({markdownContents}: {markdownContents: string}) => {
           }
         }
       }
-    };
 
+      // Handle scrolling at the bottom of the page
+      if (currentPosition === maxScrollHeight) {
+        setContentSlug(sections[sections.length - 1]);
+      }
+
+      if (currentPosition === 0) setContentSlug("");
+    }
+  };
+
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
+      setManuallySet(false);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [tableOfContents]);
+  }, [manuallySet, tableOfContents]);
+
+  const handleClick = (slug: string) => {
+    setContentSlug(slug);
+    setManuallySet(true);
+  };
 
   return (
     <div
       className={cx(
-        "fixed w-1/5 left-28 transition-all",
-        "duration-300 ease-in-out block 2xl:hidden p-8",
+        "fixed w-[21%] left-16 transition-all",
+        "duration-300 ease-in-out block 2xl:hidden p-6",
         {
           "top-20": !isScrolling,
           "top-0": isScrolling,
@@ -58,7 +78,7 @@ const TableOfContent = ({markdownContents}: {markdownContents: string}) => {
           <a
             href={`#${item.slug}`}
             key={item.slug}
-            onClick={() => setContentSlug(item.slug)}
+            onClick={() => handleClick(item.slug)}
             className={cx(
               "no-underline text-gray-400 transition-all duration-300 ease-in-out",
               {
