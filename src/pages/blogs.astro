@@ -136,7 +136,7 @@ const posts = postsConnection.edges;
                 </div>
                 <p class="text-[13px]">
                   ☕{" "}
-                  <span class="text-gray-400 ml-[2px]">
+                  <span class="text-gray-400 ml-[2px] meta-time">
                     {calculateReadingTime(item.node.content)} min read
                   </span>
                 </p>
@@ -149,7 +149,7 @@ const posts = postsConnection.edges;
                     {item.node.title}
                   </p>
 
-                  <time class="text-sm xsm:mt-3 text-gray-400">
+                  <time class="text-sm xsm:mt-3 text-gray-400 meta-date">
                     {parseTimestamp(item.node.createdAt)}
                   </time>
                 </div>

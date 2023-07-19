@@ -80,11 +80,12 @@ const TableOfContent = ({markdownContents}: {markdownContents: string}) => {
             key={item.slug}
             onClick={() => handleClick(item.slug)}
             className={cx(
-              "no-underline text-gray-400 transition-all duration-300 ease-in-out text-[15px]",
+              "toc-list no-underline transition-all duration-300 ease-in-out text-[15px]",
               {
                 "ml-4": item.level === 3,
+                "text-gray-400": item.slug !== contentSlug,
                 "ml-5": item.level === 3 && contentSlug === item.slug,
-                "text-[#3AA6B9] ml-[5px] border-l-2 px-[7px] !border-[#3AA6B9]":
+                "!text-[#3AA6B9] ml-[5px] border-l-2 px-[7px] !border-[#3AA6B9]":
                   contentSlug === item.slug,
               }
             )}>

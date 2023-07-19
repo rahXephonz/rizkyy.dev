@@ -59,6 +59,13 @@ html.light {
   .fhl {
     color: rgb(206, 109, 39);
   }
+
+  .toc-list,
+  .meta-inline,
+  .meta-time,
+  .meta-date {
+    color: rgb(61, 68, 83);
+  }
 }
 
 img {
@@ -191,7 +198,7 @@ a {
 
   p {
     font-size: 16.5px;
-    line-height: 1.6em;
+    line-height: 1.8em;
     opacity: 0.8;
 
     @media screen and (max-width: 540px) {
