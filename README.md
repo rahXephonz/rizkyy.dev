@@ -11,7 +11,9 @@ My Personal site built with Astro, Typescript, Hygraph, GraphQL and Tailwind
 - 📏 ESLint — Find and fix problems in your code
 - 💖 Prettier — Code Formatter for consistent style
 - ⚙️ EditorConfig — Maintain consistent coding styles across editors and IDEs
-- 🗂 Path Mapping — Import components or images using the `~` prefix
+- 🗂 Path Mapping — Import components or images using the `@` prefix
+- 🌐 Giscuss as commenting systems
+- ✍️ Hygraph for handling content CMS use GraphQL
 
 ## Quick Start
 
@@ -34,7 +36,7 @@ Open `http://localhost:3000` with your browser to see the result.
 ### Requirements
 
 - Node.js >= 12.22.0
-- Yarn 1 (Classic) or pnpm
+- pnpm >= 8
 
 ### Directory Structure
 
@@ -56,6 +58,6 @@ TypeScript are pre-configured with custom path mappings. To import components or
 import {Button} from "@components/Button";
 ```
 
-### Note: Switch to yarn for running this app
+### Note: Switch to pnpm for running this app
 
 By default, this starter uses pnpm, please install pnpm first for global engine package, and then install the dependencies with `pnpm`
