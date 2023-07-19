@@ -37,7 +37,7 @@ const TableOfContent = ({markdownContents}: {markdownContents: string}) => {
       }
 
       // Handle scrolling at the bottom of the page
-      if (currentPosition === maxScrollHeight) {
+      if (Math.floor(currentPosition) === maxScrollHeight) {
         setContentSlug(sections[sections.length - 1]);
       }
 
@@ -62,11 +62,11 @@ const TableOfContent = ({markdownContents}: {markdownContents: string}) => {
   return (
     <div
       className={cx(
-        "fixed w-[21%] left-16 transition-all",
-        "duration-300 ease-in-out block 2xl:hidden p-6",
+        "fixed w-[16%] left-44 transition-all",
+        "duration-300 ease-in-out block 2xl:hidden p-2",
         {
           "top-20": !isScrolling,
-          "top-0": isScrolling,
+          "top-5": isScrolling,
         }
       )}>
       <p className="text-2xl font-bold no-underline font-playfair">
@@ -80,11 +80,11 @@ const TableOfContent = ({markdownContents}: {markdownContents: string}) => {
             key={item.slug}
             onClick={() => handleClick(item.slug)}
             className={cx(
-              "no-underline text-gray-400 transition-all duration-300 ease-in-out",
+              "no-underline text-gray-400 transition-all duration-300 ease-in-out text-[15px]",
               {
-                "ml-4 text-[15px]": item.level === 3,
-                "text-[16px]": item.level !== 3,
-                "text-[#3AA6B9] ml-[5px] border-l-2 px-[7px] border-[#3AA6B9] text-[15px]":
+                "ml-4": item.level === 3,
+                "ml-5": item.level === 3 && contentSlug === item.slug,
+                "text-[#3AA6B9] ml-[5px] border-l-2 px-[7px] !border-[#3AA6B9]":
                   contentSlug === item.slug,
               }
             )}>

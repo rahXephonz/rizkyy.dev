@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap");
 
@@ -117,7 +117,7 @@ a {
       padding: 5px;
       border-radius: 2px;
       font-size: 14px;
-      font-family: "IBM Plex Mono", monospace;
+      font-family: "Jetbrains Mono", monospace;
       margin: 0 2px;
     }
   }
@@ -138,7 +138,7 @@ a {
 
   pre {
     code {
-      font-family: "IBM Plex Mono", monospace;
+      font-family: "Jetbrains Mono", monospace;
       font-size: 14px;
     }
   }
@@ -179,7 +179,7 @@ a {
 
   strong {
     font-weight: bold;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Jetbrains Mono", monospace;
   }
 
   h2,
@@ -208,7 +208,7 @@ a {
   }
 
   em {
-    font-family: "IBM Plex Mono", sans-serif;
+    font-family: "Jetbrains Mono", sans-serif;
     font-size: 15px;
     opacity: 0.8;
   }
