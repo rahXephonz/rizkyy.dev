@@ -7,6 +7,16 @@ html {
   scroll-behavior: smooth;
 }
 
+img {
+  content-visibility: auto;
+}
+
+a {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  outline: none;
+}
+
 html.dark {
   background-color: #18191b;
   color: #ffff;
@@ -64,18 +74,8 @@ html.light {
   .meta-inline,
   .meta-time,
   .meta-date {
-    color: rgb(61, 68, 83);
+    color: rgb(120, 120, 122);
   }
-}
-
-img {
-  content-visibility: auto;
-}
-
-a {
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  outline: none;
 }
 
 .noise-bg {

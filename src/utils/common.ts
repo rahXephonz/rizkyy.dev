@@ -94,20 +94,26 @@ export const graphqlFetch = async <T = TUniversal>(
   return data.json() as T;
 };
 
-export function replaceImageContent(htmlContent: string) {
+export function replaceContent(htmlContent: string) {
   // Load the HTML content
   const $ = cheerio.load(htmlContent);
 
   // Find the <img> tags
   const imgTags = $("img");
 
-  // Replace each <img> tag with the Astro component
+  // Find all <a> tags
+  const anchorTags = $("a");
+
+  // Add target="_blank" attribute to each <a> tag
+  anchorTags.each(function replaceAnchor() {
+    $(this).attr("target", "_blank");
+  });
+
   imgTags.each(function replaceImg() {
     const imageUrl = $(this).attr("src");
     const altText = $(this).attr("alt");
 
-    // Create the Astro component string
-    const astroComponent = `
+    const newImgComponent = `
       <figure>
         <picture>
           <img src="${imageUrl}" alt="${altText}" sizes="(max-width: 800px) 100vw, 800px" width="800px" height="400px" loading="eager" class="max-w-full rounded-md" />
@@ -117,7 +123,7 @@ export function replaceImageContent(htmlContent: string) {
     `;
 
     // Replace the <img> tag with the Astro component
-    $(this).replaceWith(astroComponent);
+    $(this).replaceWith(newImgComponent);
   });
 
   const bodyContent = $("body").html();

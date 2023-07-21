@@ -4,7 +4,7 @@ import {
   type PostType,
   type PostDetailType,
   graphqlFetch,
-  replaceImageContent,
+  replaceContent,
   calculateReadingTime,
 } from "@utils/common";
 import {parseTime} from "@utils/parse";
@@ -13,6 +13,7 @@ import {postQuery, postDetailQuery} from "@graphql/query";
 import {markdown} from "@astropub/md";
 import Container from "@components/container.astro";
 import TableOfContent from "@components/table-of-content";
+import ProgressBar from "@components/progress-bar";
 import BlogLayout from "@layouts/BlogLayout.astro";
 
 type PostQueryType = z.infer<typeof PostType>;
@@ -40,10 +41,11 @@ const {
 const date = parseTime(post.createdAt);
 const html = await markdown(post.content);
 
-const updatedHtmlContent = replaceImageContent(html.toString());
+const updatedHtmlContent = replaceContent(html.toString());
 ---
 
 <BlogLayout title={post.title} description={post.excerpt} date={date}>
+  <ProgressBar client:load />
   <Fragment>
     <TableOfContent client:load markdownContents={post.content} />
     <Container class="border-l 2xl:border-none border-gray-600">
@@ -124,4 +126,5 @@ const updatedHtmlContent = replaceImageContent(html.toString());
 <script src="/js/highlight.min.js" is:inline></script>
 <script is:inline>
   hljs.highlightAll();
+  hljs.configure({ignoreUnescapedHTML: true});
 </script>

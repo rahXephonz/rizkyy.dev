@@ -84,7 +84,7 @@ const TableOfContent = ({markdownContents}: {markdownContents: string}) => {
               {
                 "ml-4": item.level === 3,
                 "text-gray-400": item.slug !== contentSlug,
-                "ml-5": item.level === 3 && contentSlug === item.slug,
+                "!ml-5": item.level === 3 && contentSlug === item.slug,
                 "!text-[#3AA6B9] ml-[5px] border-l-2 px-[7px] !border-[#3AA6B9]":
                   contentSlug === item.slug,
               }
