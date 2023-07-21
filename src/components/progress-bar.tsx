@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 
 const ProgressBar = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -21,14 +21,12 @@ const ProgressBar = () => {
   }, []);
 
   return (
-    <Fragment>
-      <div className="w-full h-[2px] bg-gray-300 top-0 fixed z-[2]">
-        <div
-          className="h-full bg-[#3AA6B9]"
-          style={{width: `${scrollProgress}%`}}
-        />
-      </div>
-    </Fragment>
+    <div className="w-full h-[2px] bg-transparent top-0 fixed z-[2]">
+      <div
+        className="h-full bg-[#3AA6B9]"
+        style={{width: `${scrollProgress}%`}}
+      />
+    </div>
   );
 };
 
