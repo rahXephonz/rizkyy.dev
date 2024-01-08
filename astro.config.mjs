@@ -8,6 +8,7 @@ import react from "@astrojs/react";
 
 export default defineConfig({
   schema: rssSchema,
+  trailingSlash: "never",
   site: "https://rizkyy.dev",
   integrations: [
     tailwind(),

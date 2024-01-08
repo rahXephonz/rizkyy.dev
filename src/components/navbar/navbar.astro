@@ -5,19 +5,22 @@ import cx from "classnames";
 const menuItems = [
   {
     title: "Blogs",
-    path: "/blogs/",
+    path: "/blogs",
+    regexPath: "/blogs",
   },
   {
     title: "Projects",
-    path: "/projects/",
+    path: "/projects",
+    regexPath: "/projects",
   },
   {
     title: "About",
     path: "/",
+    regexPath: "",
   },
 ];
 
-const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname.replace(/\/$/, "")
 const [item] = menuItems.filter((i) => i.path === currentPath);
 ---
 
@@ -31,10 +34,10 @@ const [item] = menuItems.filter((i) => i.path === currentPath);
             <Fragment key={idx}>
               <li>
                 <a
-                  class="text-[16px]"
+                
                   href={i.path}
-                  class={cx({
-                    "no-underline opacity-50": i.path === currentPath,
+                  class={cx("text-[16px]",{
+                    "opacity-50": i.regexPath === currentPath,
                   })}>
                   {i.title}
                 </a>
