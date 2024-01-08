@@ -156,22 +156,27 @@ export function calculateReadingTime(
 export function generateTableOfContents(markdownContent: string): TocItem[] {
   const md = new MarkdownIt();
   const tokens = md.parse(markdownContent, {});
+
   const tocItems: TocItem[] = [];
 
   for (const token of tokens) {
     if (token.type === "heading_open") {
       const headingLevel = Number(token.tag.slice(1)); // Extract heading level from the tag
-      const headingContentToken = tokens[tokens.indexOf(token) + 1]; // Get the next token for heading content
-      const slug = headingContentToken.content
-        .toLowerCase()
-        .replace(/[\s]+/g, "-") // Convert spaces to dashes
-        .replace(/[^\w-]+/g, ""); // Remove non-word characters except dashes
 
-      tocItems.push({
-        content: headingContentToken.content,
-        slug,
-        level: headingLevel,
-      });
+      // Check if the heading level is "h2" before processing
+      if (token.tag === "h2" || token.tag === "h3") {
+        const headingContentToken = tokens[tokens.indexOf(token) + 1]; // Get the next token for heading content
+        const slug = headingContentToken.content
+          .toLowerCase()
+          .replace(/[\s]+/g, "-") // Convert spaces to dashes
+          .replace(/[^\w-]+/g, ""); // Remove non-word characters except dashes
+
+        tocItems.push({
+          content: headingContentToken.content,
+          slug,
+          level: headingLevel,
+        });
+      }
     }
   }
 

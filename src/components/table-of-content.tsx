@@ -60,13 +60,14 @@ const TableOfContent = ({markdownContents}: {markdownContents: string}) => {
   };
 
   return (
-    <div
+    <nav
+      style={{position: "-webkit-sticky"}}
       className={cx(
-        "fixed w-[16%] left-44 transition-all",
-        "duration-300 ease-in-out block 2xl:hidden p-2",
+        "transition-all w-1/3 sticky top-0 h-full px-10",
+        "duration-300 ease-in-out 2xl:hidden p-2",
         {
-          "top-20": !isScrolling,
-          "top-5": isScrolling,
+          "top-5": !isScrolling,
+          "top-10": isScrolling,
         }
       )}>
       <p className="text-2xl font-bold no-underline font-playfair">
@@ -93,7 +94,7 @@ const TableOfContent = ({markdownContents}: {markdownContents: string}) => {
           </a>
         ))}
       </div>
-    </div>
+    </nav>
   );
 };
 

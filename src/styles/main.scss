@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400;1,500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap");
 
 html {
   scroll-behavior: smooth;
@@ -39,6 +39,15 @@ html.dark {
     border: 0.1px solid rgb(90, 89, 89);
   }
 
+  h4::after {
+    color: #ffff;
+    margin-left: 10px;
+    width: 15px;
+    height: 30px;
+    content: "λ";
+    position: absolute;
+  }
+
   .fhl {
     color: yellow;
   }
@@ -60,6 +69,15 @@ html.light {
     pre {
       background-color: #f7f7f7 !important;
     }
+
+    h4::after {
+      color: #a19f9fdd;
+      margin-left: 10px;
+      width: 15px;
+      height: 30px;
+      content: "λ";
+      position: absolute;
+    }
   }
 
   hr {
@@ -76,14 +94,6 @@ html.light {
   .meta-date {
     color: rgb(120, 120, 122);
   }
-}
-
-.noise-bg {
-  background-image: url("/noise.png");
-  position: fixed;
-  inset: 0;
-  mix-blend-mode: hard-light;
-  pointer-events: none;
 }
 
 .meta-categories {
@@ -125,9 +135,9 @@ html.light {
   p,
   li {
     code {
-      padding: 5px;
+      padding: 4px;
       border-radius: 2px;
-      font-size: 14px;
+      font-size: 13.8px;
       font-family: "IBM Plex Mono", monospace;
       margin: 0 2px;
     }
@@ -150,7 +160,7 @@ html.light {
   pre {
     code {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 14px;
+      font-size: 15px;
     }
   }
 
@@ -168,8 +178,9 @@ html.light {
     list-style-type: inherit;
     padding: 0px 15px;
     li {
-      font-size: 16px;
+      font-size: 16.5px;
       margin: 10px 0px;
+      line-height: 1.7em;
     }
   }
 
@@ -200,14 +211,15 @@ html.light {
     font-family: "Playfair Display", sans-serif;
   }
 
-  p {
-    font-size: 16.5px;
-    line-height: 1.8em;
-    opacity: 0.8;
+  h4 {
+    font-size: 22px;
+    font-weight: bold;
+  }
 
-    @media screen and (max-width: 540px) {
-      font-size: 15px;
-    }
+  p {
+    font-size: 17.6px;
+    line-height: 1.7em;
+    opacity: 0.8;
   }
 
   img {
@@ -220,7 +232,7 @@ html.light {
 
   em {
     font-family: "IBM Plex Mono", sans-serif;
-    font-size: 15px;
+    font-size: 16px;
     opacity: 0.8;
   }
 
@@ -229,6 +241,12 @@ html.light {
     img {
       height: 100%;
       width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 540px) {
+    p {
+      font-size: 16px;
     }
   }
 

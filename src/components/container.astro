@@ -1,15 +1,16 @@
 ---
 import cx from "classnames";
 
-const {class: className} = Astro.props;
+const {class: className, isUsingPadding = true} = Astro.props;
 const currentPath = Astro.url.pathname;
 const isBlogPath = currentPath === "/blogs/";
 ---
 
 <div
-  class:list={cx(["mx-auto px-5", className], {
-    "max-w-3xl": !isBlogPath,
+  class:list={cx(["mx-auto", className], {
+    "max-w-[850px] lg:max-w-2xl": !isBlogPath,
     "max-w-4xl": isBlogPath,
+    "px-5":isUsingPadding
   })}>
   <slot />
 </div>

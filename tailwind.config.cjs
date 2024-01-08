@@ -6,13 +6,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter Tight", "sans-serif"],
+        sans: ["DM Sans", "sans-serif"],
         playfair: ['"Playfair Display"', "sans-serif"],
       },
 
       screens: {
         "2xl": {max: "1535px"},
-        // => @media (max-width: 1535px) { ... }
+        // => @media (max-width: 1536px) { ... }
 
         xl: {max: "1280px"},
         // => @media (max-width: 1280px) { ... }

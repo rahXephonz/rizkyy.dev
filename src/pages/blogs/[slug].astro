@@ -11,6 +11,8 @@ import {parseTime} from "@utils/parse";
 import {Picture} from "@astrojs/image/components";
 import {postQuery, postDetailQuery} from "@graphql/query";
 import {markdown} from "@astropub/md";
+
+import Footer from "@components/footer.astro"
 import Container from "@components/container.astro";
 import TableOfContent from "@components/table-of-content";
 import ProgressBar from "@components/progress-bar";
@@ -46,11 +48,13 @@ const updatedHtmlContent = replaceContent(html.toString());
 
 <BlogLayout title={post.title} description={post.excerpt} date={date}>
   <ProgressBar client:load />
-  <Fragment>
+  <div class="max-w-7xl w-full mx-auto flex xsm:max-w-full xsm:block">
     <TableOfContent client:load markdownContents={post.content} />
-    <Container class="border-l 2xl:border-none border-gray-600">
-      <div
-        class="mt-20 text-purple-400 flex space-x-2 items-center meta-categories">
+    <Container isUsingPadding={false}>
+
+    <div class="border-l 2xl:border-none border-gray-600 px-5">
+        <div
+        class="mt-5 text-purple-400 flex space-x-2 items-center meta-categories">
         {
           post.categories.map((category) => (
             <span class="text-[15px]">#{category.name}</span>
@@ -119,8 +123,12 @@ const updatedHtmlContent = replaceContent(html.toString());
           />
         ) : null
       }
-    </Container>
-  </Fragment>
+      </div>
+
+      <Footer />
+</Container>
+
+  </div>
 </BlogLayout>
 
 <script src="/js/highlight.min.js" is:inline></script>

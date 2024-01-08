@@ -1,11 +1,10 @@
 ---
-import cx from "classnames";
 import Container from "./container.astro";
 
 const socialMedia = [
   {id: "Github", url: "https://github.com/rahXephonz"},
   {id: "LinkedIn", url: "https://linkedin.com/in/mrizkyy"},
-  {id: "hello@rizkyy.dev", url: "mailto:hello@rizkyy.dev"},
+  {id: "Mail", url: "mailto:mrizkyy027@gmail.com"},
 ];
 ---
 
@@ -15,11 +14,7 @@ const socialMedia = [
       {
         socialMedia.map((item, itemIdx, size) => (
           <div class="flex space-x-2">
-            <a
-              href={item.url}
-              class={cx({"no-underline": size.length - 1 === itemIdx})}>
-              {item.id}
-            </a>
+            <a href={item.url}>{item.id}</a>
             {size.length - 1 === itemIdx ? null : <span>·</span>}
           </div>
         ))
