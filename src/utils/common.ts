@@ -15,6 +15,21 @@ interface TocItem {
   level: number;
 }
 
+export const CodeType = z.object({
+  data: z.object({
+    codesConnection: z.object({
+      edges: z.array(
+        z.object({
+          node: z.object({
+            title: z.string(),
+            slug: z.string(),
+          }),
+        })
+      ),
+    }),
+  }),
+});
+
 export const PostType = z.object({
   data: z.object({
     postsConnection: z.object({
@@ -50,6 +65,16 @@ export const PostType = z.object({
         }),
       })
     ),
+  }),
+});
+
+export const CodeDetailType = z.object({
+  data: z.object({
+    code: z.object({
+      title: z.string(),
+      slug: z.string(),
+      content: z.string(),
+    }),
   }),
 });
 

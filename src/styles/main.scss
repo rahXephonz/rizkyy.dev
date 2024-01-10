@@ -1,7 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400;1,500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;1,300&display=swap');
 
 html {
   scroll-behavior: smooth;
@@ -97,10 +96,10 @@ html.light {
 }
 
 .meta-categories {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Ubuntu Mono", sans-serif;
 }
 
-.blog-prose {
+.blog-prose, .code-prose {
   .hljs-comment {
     font-style: italic;
   }
@@ -138,7 +137,7 @@ html.light {
       padding: 4px;
       border-radius: 2px;
       font-size: 13.8px;
-      font-family: "IBM Plex Mono", monospace;
+      font-family: "JetBrains Mono", monospace;
       margin: 0 2px;
     }
   }
@@ -159,7 +158,7 @@ html.light {
 
   pre {
     code {
-      font-family: "IBM Plex Mono", monospace;
+      font-family: "JetBrains Mono", monospace;
       font-size: 15px;
     }
   }
@@ -201,7 +200,7 @@ html.light {
 
   strong {
     font-weight: bold;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "JetBrains Mono", monospace;
   }
 
   h2,
@@ -231,7 +230,7 @@ html.light {
   }
 
   em {
-    font-family: "IBM Plex Mono", sans-serif;
+    font-family: "JetBrains Mono", sans-serif;
     font-size: 16px;
     opacity: 0.8;
   }

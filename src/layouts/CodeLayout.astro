@@ -1,14 +1,11 @@
 ---
 import {SEO} from "astro-seo";
 import {createOgImage} from "@utils/createOgImage";
-import Theme from "@components/theme.astro";
-import Footer from "@components/footer.astro";
-import Navbar from "@components/navbar/navbar.astro";
 import "../styles/main.scss";
+import Navbar from "@components/navbar/navbar.astro";
 
 export interface Props {
   title: string;
-  date?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -29,57 +26,57 @@ const description =
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/highlightjs-copy@1.0.3/dist/highlightjs-copy.min.css"
+    />
     <meta name="generator" content={Astro.generator} />
 
     <SEO
-      title={title}
-      description={description}
-      canonical={canonicalURL}
-      twitter={{
-        creator: "@Ioofyy",
-        site: "@rizkyy.dev",
-        card: "summary_large_image",
-      }}
-      openGraph={{
-        basic: {
-          url: canonicalURL,
-          type: "website",
-          title: "Muhamad Rizky",
-          image: ogImage,
-        },
-        optional: {
-          description,
-          siteName: "rizkyy.dev",
-        },
-        image: {
-          alt: title,
-        },
-      }}
-    />
+    title={title}
+    description={description}
+    canonical={canonicalURL}
+    twitter={{
+      creator: "@Ioofyy",
+      site: "@rizkyy.dev",
+      card: "summary_large_image",
+    }}
+    openGraph={{
+      basic: {
+        url: canonicalURL,
+        type: "website",
+        title: "Muhamad Rizky",
+        image: ogImage,
+      },
+      optional: {
+        description,
+        siteName: "rizkyy.dev",
+      },
+      image: {
+        alt: title,
+      },
+    }}
+  />
   </head>
   <body>
-    <Navbar />
+    <Navbar/>
     <div class="noise-bg"></div>
-    <main>
-      <slot />
-    </main>
-    <Footer />
-    <Theme />
+    <slot />
+
     {
       import.meta.env.PROD ? (
         <Fragment>
           <script
             async
-            defer
+            strategy="afterInteractive"
             type="text/javascript"
             src="https://umami.rizkyy.dev/script.js"
             data-website-id="67b6272c-99cf-409a-8950-f6bad8cf296f"
           />
-
           <script type="text/javascript" is:inline>
             {(function (c, l, a, r, i, t, y) {
               c[a] =
@@ -97,6 +94,29 @@ const description =
         </Fragment>
       ) : null
     }
-    
+
+    <script is:inline>
+      const theme = (() => {
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+          return "dark";
+
+        return "light";
+      })();
+
+      if (theme === "light") {
+        document.documentElement.classList.add("light");
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "/css/hljs-xcode.css";
+        document.head.appendChild(link);
+      } else {
+        document.documentElement.classList.add("dark");
+
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "/css/hljs-github-dark.css";
+        document.head.appendChild(link);
+      }
+    </script>
   </body>
 </html>

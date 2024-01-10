@@ -1,3 +1,16 @@
+export const codeQuery = `
+  query CodeQuery($first: Int, $skip: Int) {
+    codesConnection(first: $first, skip: $skip, orderBy: createdAt_DESC) {
+      edges {
+        node {
+          title
+          slug
+        }
+      }
+    }
+  }
+`;
+
 export const postQuery = `
   query PostQuery($first: Int, $skip: Int) {
     postsConnection(first: $first, skip: $skip, orderBy: createdAt_DESC) {
@@ -31,6 +44,16 @@ export const postQuery = `
         url
         fileName
       }
+    }
+  }
+`;
+
+export const codeDetailQuery = `
+  query CodeDetailQuery($slug: String) {
+    code(where: {slug: $slug}) {
+      title
+      slug
+      content
     }
   }
 `;

@@ -6,12 +6,17 @@ const menuItems = [
   {
     title: "Blogs",
     path: "/blogs",
-    regexPath: "/blogs",
+    regexPath: "blogs",
   },
   {
     title: "Projects",
     path: "/projects",
-    regexPath: "/projects",
+    regexPath: "projects",
+  },
+  {
+    title: "Codes",
+    path: "/codes",
+    regexPath: "codes",
   },
   {
     title: "About",
@@ -21,7 +26,11 @@ const menuItems = [
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "")
+const splitPath = currentPath.split("/");
 const [item] = menuItems.filter((i) => i.path === currentPath);
+
+const isAboutPath = currentPath === ""
+
 ---
 
 <Container class="mt-16 mb-14">
@@ -37,7 +46,7 @@ const [item] = menuItems.filter((i) => i.path === currentPath);
                 
                   href={i.path}
                   class={cx("text-[16px]",{
-                    "opacity-50": i.regexPath === currentPath,
+                    "opacity-50": isAboutPath ? i.regexPath === currentPath : i.regexPath.includes(splitPath[1])
                   })}>
                   {i.title}
                 </a>

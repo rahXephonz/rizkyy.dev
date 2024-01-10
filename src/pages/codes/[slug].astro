@@ -1,0 +1,88 @@
+---
+import {type z} from "astro:content";
+import {
+  type CodeType,
+  graphqlFetch,
+  replaceContent,
+  type CodeDetailType,
+} from "@utils/common";
+import {codeQuery, codeDetailQuery} from "@graphql/query";
+import {markdown} from "@astropub/md";
+
+import Footer from "@components/footer.astro"
+import Container from "@components/container.astro";
+import CodeLayout from "@layouts/CodeLayout.astro";
+
+type CodeQueryType = z.infer<typeof CodeType>;
+type DetailCodeQueryType = z.infer<typeof CodeDetailType>;
+
+export async function getStaticPaths() {
+  const {data} = await graphqlFetch<CodeQueryType>({
+    query: codeQuery,
+  });
+
+  return data.codesConnection.edges.map((item) => ({
+    params: {slug: item.node.slug},
+  }));
+}
+
+const {slug} = Astro.params;
+
+const {
+  data: {code},
+} = await graphqlFetch<DetailCodeQueryType>({
+  query: codeDetailQuery,
+  variables: {slug},
+});
+
+const html = await markdown(code.content);
+const updatedHtmlContent = replaceContent(html.toString());
+
+---
+  <CodeLayout title={code.title}>
+    <Container isUsingPadding={false}>
+    <div class="px-5">
+        <h1 class="text-4xl xsm:text-3xl my-1 font-bold font-playfair">
+          {code.title}
+        </h1>
+
+        <div class="code-prose mt-10">
+          <Fragment set:html={updatedHtmlContent} />
+        </div>
+
+      {
+        import.meta.env.PROD ? (
+          <script
+            src="https://giscus.app/client.js"
+            data-repo="rahXephonz/rizkyy.dev"
+            data-repo-id="R_kgDOJ7KWXQ"
+            data-category="General"
+            data-category-id="DIC_kwDOJ7KWXc4CX4Ft"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async
+          />
+        ) : null
+      }
+      </div>
+
+      <Footer />
+</Container>
+</CodeLayout>
+
+<script src="/js/highlight.min.js" is:inline></script>
+<script src="https://unpkg.com/highlightjs-copy@1.0.3/dist/highlightjs-copy.min.js" is:inline></script>
+<script is:inline>
+  hljs.highlightAll();
+  hljs.configure({ignoreUnescapedHTML: true});
+  hljs.addPlugin(new CopyButtonPlugin());
+</script>
+
+
