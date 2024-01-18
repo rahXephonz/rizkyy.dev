@@ -141,9 +141,10 @@ export function replaceContent(htmlContent: string) {
     const newImgComponent = `
       <div class="image-container">
         <div id="show-modal" class="modal">
-          <span class="close">&times;</span>
-          <img class="modal-content" id="modal-img"/>
-          <p class="caption"></p>
+          <div class="flex h-full flex-col justify-center">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modal-img" alt="${altText}"/>
+          </div>
         </div>
 
         <figure>

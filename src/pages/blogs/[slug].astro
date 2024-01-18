@@ -154,13 +154,11 @@ const updatedHtmlContent = replaceContent(html.toString());
       var img = container.querySelector('.image-pict');
       var modalImg = container.querySelector('.modal-content');
       var closeButton = container.querySelector('.close');
-      var captionText = container.querySelector(".caption");
 
       // Set up the click event for each image within the container
       img.onclick = function () {
         modal.style.display = 'block';
         modalImg.src = img.src;
-        captionText.innerHTML = img.alt;
       };
 
       // Set up the click event for the close button within the container
