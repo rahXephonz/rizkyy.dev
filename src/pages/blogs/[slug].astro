@@ -82,6 +82,8 @@ const updatedHtmlContent = replaceContent(html.toString());
         </div>
       </div>
 
+
+
       <div>
         <div class="meta-image">
           <Picture
@@ -137,4 +139,34 @@ const updatedHtmlContent = replaceContent(html.toString());
   hljs.highlightAll();
   hljs.configure({ignoreUnescapedHTML: true});
   hljs.addPlugin(new CopyButtonPlugin());
+</script>
+
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Find all elements with class "image-container"
+    var imageContainers = document.querySelectorAll('.image-container');
+
+    // // Loop through each image container
+    imageContainers.forEach(function (container, index) {
+      // Find the modal, image, and close button within each container
+      var modal = container.querySelector('.modal');
+      var img = container.querySelector('.image-pict');
+      var modalImg = container.querySelector('.modal-content');
+      var closeButton = container.querySelector('.close');
+      var captionText = container.querySelector(".caption");
+
+      // Set up the click event for each image within the container
+      img.onclick = function () {
+        modal.style.display = 'block';
+        modalImg.src = img.src;
+        captionText.innerHTML = img.alt;
+      };
+
+      // Set up the click event for the close button within the container
+      closeButton.onclick = function () {
+        modal.style.display = 'none';
+      };
+    });
+  });
 </script>

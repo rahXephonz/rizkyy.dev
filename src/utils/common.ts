@@ -139,12 +139,20 @@ export function replaceContent(htmlContent: string) {
     const altText = $(this).attr("alt");
 
     const newImgComponent = `
-      <figure>
-        <picture>
-          <img src="${imageUrl}" alt="${altText}" sizes="(max-width: 800px) 100vw, 800px" width="800px" height="400px" loading="eager" class="max-w-full rounded-md" />
-        </picture>
-        <figcaption class="text-center text-gray-400 text-sm">${altText}</figcaption>
-      </figure>
+      <div class="image-container">
+        <div id="show-modal" class="modal">
+          <span class="close">&times;</span>
+          <img class="modal-content" id="modal-img"/>
+          <p class="caption"></p>
+        </div>
+
+        <figure>
+          <picture>
+            <img src="${imageUrl}" alt="${altText}" sizes="(max-width: 800px) 100vw, 800px" width="800px" height="400px" loading="eager" class="image-pict rounded-sm max-w-full" />
+          </picture>
+          <figcaption class="text-center text-gray-400 text-sm">${altText}</figcaption>
+        </figure>
+      </div>
     `;
 
     // Replace the <img> tag with the Astro component
