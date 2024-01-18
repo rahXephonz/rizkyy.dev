@@ -4,7 +4,7 @@ My Personal site built with Astro, Typescript, Hygraph, GraphQL and Tailwind
 
 ## Features
 
-- ⚡️ Astro 2
+- ⚡️ Astro 4
 - ⚛️ React Extended
 - ⛑ TypeScript
 - 💅 Tailwind for styling and components
@@ -35,7 +35,7 @@ Open `http://localhost:3000` with your browser to see the result.
 
 ### Requirements
 
-- Node.js >= 12.22.0
+- Node.js >= latest
 - pnpm >= 8
 
 ### Directory Structure
